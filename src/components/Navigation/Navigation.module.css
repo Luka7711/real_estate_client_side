@@ -1,0 +1,50 @@
+.nav_bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: static;
+    border: 1px solid #d8d8d8;
+}
+
+
+
+
+/* LEFT SIDE NAV LINKS*/ 
+
+.nav_li {
+    display: inline-block;
+    line-height: 80px;
+    font-size: 18px;
+}
+
+.nav_li a {
+    color: rgb(42, 42, 51);
+}
+
+.nav_li a, .logo a {
+    padding: 14px;
+    text-decoration: none;
+}
+
+.nav_li a:hover {
+    color:rgb(0, 106, 255)
+}
+
+
+
+/* LOGO STYLING*/
+
+
+.logo a {
+    color:rgb(0, 106, 255);
+    font-size: 22px;
+}
+
+.logo {
+    line-height: 80px;
+}
+
+.logo:hover {
+    cursor: pointer;
+}
