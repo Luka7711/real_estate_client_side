@@ -2,7 +2,7 @@ import '../style/App.css'
 import { Route, Routes } from 'react-router-dom';
 import HousingList from './HousingList';
 import Home from './Home';
-import Navigation from './Navigation';
+import Navigation from './Navigation/Navigation';
 import OneHouse from './OneHouse';
 
 const divStyle = {
