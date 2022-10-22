@@ -1,4 +1,5 @@
 import fetchHouseList from "../apis/housing";
+import { getUserGeolocation } from '../utils';
 
 // Action creator
 
@@ -12,5 +13,10 @@ export const fetchHouses = () => async dispatch => {
     dispatch({ type: "FETCH_HOUSES", payload: promise });
 };
 
+
+export const fetchUserGeolocation = () => async dispatch => {
+    const geolocation = await getUserGeolocation();
+    dispatch({ type: "FETCH_USER_GEOLOCATION", payload: geolocation });
+}
 
 
