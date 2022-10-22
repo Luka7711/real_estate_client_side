@@ -5,10 +5,6 @@ import Home from './Home';
 import Navigation from './Navigation/Navigation';
 import OneHouse from './OneHouse';
 
-const divStyle = {
-  margin: "30px",
-  fontFamily: "Helvetica"
-}
 
 const App = () => {
   return (
