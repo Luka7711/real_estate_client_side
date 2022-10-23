@@ -11,4 +11,4 @@ const Home = () => {
     return <div>Home</div>
 }
 
-export default connect(null, fetchUserGeolocation)(Home);
+export default connect(null, { fetchUserGeolocation })(Home);
