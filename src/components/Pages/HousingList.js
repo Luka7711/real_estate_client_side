@@ -17,7 +17,8 @@ const housingAlbumContainer = {
 class HousingList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchHouses();
+        console.log(this.props.location, 'location')
+        this.props.fetchHouses({ ...this.props.location });
     }
 
     renderList() {
@@ -40,7 +41,8 @@ class HousingList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        houses: state.houses
+        houses: state.houses,
+        location: state.userGeolocation
     }
 }
 

@@ -36,10 +36,14 @@ export const getUserGeolocation = async () => {
         } 
         
     } catch (error) {
-        if (error.message === "User denied geolocation prompt") {
+        if (error.message === "User denied geolocation prompt" || error.message === 'User denied Geolocation') {
             return defaultUserLocation;
         } 
         return error;
     }
-}
+} 
 
+(async() => {
+    const response = await getUserGeolocation();
+    console.log(response)
+})();
