@@ -1,20 +1,23 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
 
+
+
+export const getCoords = async () => {
+    const pos = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+
+    return {
+        long: pos.coords.longitude,
+        lat: pos.coords.latitude,
+    };
+};
+
 // get state and city data
 export const getUserGeolocation = async () => {
-    const getCoords = async () => {
-        const pos = await new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
     
-        return {
-            long: pos.coords.longitude,
-            lat: pos.coords.latitude,
-        };
-    };
     try {
-        
         const coords = await getCoords(); 
 
         if (coords) {
@@ -42,8 +45,3 @@ export const getUserGeolocation = async () => {
         return error;
     }
 } 
-
-(async() => {
-    const response = await getUserGeolocation();
-    console.log(response)
-})();
