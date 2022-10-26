@@ -1,5 +1,4 @@
-// import { houseData } from '../data';
-let houseData = null;
+import { houseData } from '../data';
 
 export default async function fetchData(city, state){
     /*

@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { fetchUserGeolocation } from '../../actions';
 
 
+
+
+
 const Home = ({ location, fetchUserGeolocation }) => {
     
     useEffect(() => {
@@ -15,6 +18,12 @@ const Home = ({ location, fetchUserGeolocation }) => {
 
     return <h1>Home Page</h1>
 }
+
+
+
+
+
+
 
 const mapStateToProps = state => {
     return {
