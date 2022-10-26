@@ -8,7 +8,6 @@ export default async function fetchData(){
     if (houseData) {
         return houseData
     } else {
-        console.log('')
         const url = "https://us-real-estate.p.rapidapi.com/v2/for-sale?offset=0&limit=42&state_code=MI&city=Detroit&sort=newest";
         const options = {
             method: 'GET',
@@ -27,3 +26,6 @@ export default async function fetchData(){
         }
     }
 }
+
+
+

@@ -5896,3 +5896,8 @@ export const houseData = [
         }
     }
 ]
+
+export const defaultUserLocation = {
+    city: "Los Angeles",
+    state: "CA"
+}

@@ -1,9 +1,9 @@
 import '../style/App.css'
 import { Route, Routes } from 'react-router-dom';
-import HousingList from './HousingList';
-import Home from './Home';
+import HousingList from './Pages/HousingList';
+import Home from './Pages/Home';
 import Navigation from './Navigation/Navigation';
-import OneHouse from './OneHouse';
+import OneHouse from './Pages/OneHouse';
 
 
 const App = () => {

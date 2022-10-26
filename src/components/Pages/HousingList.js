@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchHouses } from '../actions';
+import { fetchHouses } from '../../actions';
 import uuid from 'react-uuid';
-import House from './House';
+import House from '../Shared/House';
 
 const housingAlbumContainer = {
     display: "grid",
@@ -13,9 +13,6 @@ const housingAlbumContainer = {
     alignItems: 'center'
 }
 
-const content = {
-    justifyContent: 'center'
-}
 
 class HousingList extends React.Component {
 
@@ -25,7 +22,6 @@ class HousingList extends React.Component {
 
     renderList() {
         if (this.props.houses.length > 0) {
-            console.log(this.props.houses)
             return this.props.houses.map((data) => <House key={uuid()} data={data} houseId={data.property_id}/> ) 
         }
         else {
