@@ -1,22 +1,34 @@
 import { useEffect } from "react";
 import { connect } from 'react-redux';
 import { fetchUserGeolocation } from '../../actions';
+import { fetchHouses } from "../../actions";
+import HousingList from "./HousingList";
 
+/* Display static houses */
 
+const Home = ({ location, fetchUserGeolocation, fetchHouses }) => {
+    const apiLimit = 8;
 
-
-
-const Home = ({ location, fetchUserGeolocation }) => {
-    
     useEffect(() => {
-        window.addEventListener('load', fetchUserGeolocation);
+        window.addEventListener('load', async() => {
+            await fetchUserGeolocation();
+        });
         return () => {
             window.removeEventListener('load', fetchUserGeolocation);
         }
-    },[])
+    })
+    
+    useEffect(() => {
+        if (location) {
+            fetchHouses(location.city, location.state, apiLimit);
+        }
+    }, [location])
 
-
-    return <h1>Home Page</h1>
+    return (
+        <> 
+            <HousingList/>
+        </>
+    )
 }
 
 
@@ -27,8 +39,9 @@ const Home = ({ location, fetchUserGeolocation }) => {
 
 const mapStateToProps = state => {
     return {
-        location: state.userGeolocation
+        location: state.userGeolocation,
+        houses: state.houses
     }
 }
 
-export default connect(mapStateToProps, { fetchUserGeolocation })(Home);
+export default connect(mapStateToProps, { fetchUserGeolocation, fetchHouses })(Home);
