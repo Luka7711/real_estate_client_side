@@ -1,6 +1,6 @@
 // import { houseData } from '../data';
 
-export default async function fetchData(city, state, limit){
+export default async function fetchData(city, state){
     /*
         use static data, unless need to use 3rd party API
         data from Rapid API
@@ -9,7 +9,7 @@ export default async function fetchData(city, state, limit){
     if (houseData) {
         return houseData
     } else {
-        const url = `https://us-real-estate.p.rapidapi.com/for-sale?offset=0&limit=${limit}&state_code=${state}&city=${city}&sort=newest`
+        const url = `https://us-real-estate.p.rapidapi.com/for-sale?offset=0&limit=200&state_code=${state}&city=${city}&sort=newest`
         const options = {
             method: 'GET',
             headers: {

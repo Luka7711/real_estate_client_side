@@ -6,27 +6,30 @@ import HousingList from "./HousingList";
 
 /* Display static houses */
 
-const Home = ({ location, fetchUserGeolocation, fetchHouses }) => {
-    const apiLimit = 8;
+const Home = ({ 
+        location, 
+        fetchUserGeolocation, 
+        fetchHouses,
+        houses
+    }) => {
 
     useEffect(() => {
-        window.addEventListener('load', async() => {
-            await fetchUserGeolocation();
-        });
+        window.addEventListener('load', () => {
+            fetchUserGeolocation();
+        })
+        
+        if (location) fetchHouses(location.city, location.state);
+
         return () => {
             window.removeEventListener('load', fetchUserGeolocation);
         }
-    })
-    
-    useEffect(() => {
-        if (location) {
-            fetchHouses(location.city, location.state, apiLimit);
-        }
-    }, [location])
+    }, [location]);
+
+    const renderedHouses = houses.slice(0, 8);
 
     return (
         <> 
-            <HousingList/>
+            <HousingList houses={renderedHouses}/>
         </>
     )
 }

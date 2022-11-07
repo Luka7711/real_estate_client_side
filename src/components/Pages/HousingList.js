@@ -15,7 +15,7 @@ const housingAlbumContainer = {
 }
 
 
-function HousingList({ houses }){
+export default function HousingList({ houses }){
 
     const renderList = houses.map(house => <House key={uuid()} data={house} houseId={house['property_id']}/>)
 
@@ -25,14 +25,3 @@ function HousingList({ houses }){
         </div>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        houses: state.houses
-    }
-}
-
-export default connect(
-    mapStateToProps, 
-    { fetchHouses }
-)(HousingList);
