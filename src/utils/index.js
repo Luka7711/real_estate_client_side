@@ -62,3 +62,13 @@ export function getSpaceDetails({description}) {
     
     return house_space_information
 }
+
+export function getAddress({location}) {
+    const keys = ['line', 'city', 'state_code', 'postal_code'];
+    let address = "";
+
+    for (let key of keys) {
+        address += location['address'][key] + ", "
+    }
+    return address.slice(0, -2)
+}

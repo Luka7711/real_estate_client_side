@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './House.module.css'
-import { integerToThousands, getSpaceDetails } from '../../utils';
+import { integerToThousands, getSpaceDetails, getAddress } from '../../utils';
 
 
 
@@ -25,6 +25,7 @@ function Description({ house_obj, houseId }) {
         <ul className={styles.ul_styles}>
             <li>${integerToThousands(house_obj.list_price)}</li>
             <li>{getSpaceDetails(house_obj)}</li>
+            <li>{getAddress(house_obj)}</li>
         </ul>
     )
 }
