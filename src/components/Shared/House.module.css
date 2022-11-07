@@ -1,0 +1,32 @@
+
+.img_style {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.img_container {
+    width: 300px;
+    height: 200px;
+}
+
+
+.ul_style {
+    list-style: none;
+    padding: 10px;
+}
+
+.price_primary {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.secondary_details {
+    font-size: .8rem;
+    padding: 5px 0;
+}
+
+.container_card {
+    background-color: rgb(244, 244, 244)
+}

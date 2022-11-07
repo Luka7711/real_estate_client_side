@@ -1,61 +1,39 @@
-import uuid from "react-uuid";
 import { Link } from 'react-router-dom';
+import styles from './House.module.css'
+import { integerToThousands, getSpaceDetails, getAddress } from '../../utils';
 
 
-const imgStyle = {
-    width: "300px",
-    height: '200px',
-    objectFit: 'cover',
-}
 
-const imgContainer = {
-    border: "1px solid lightgrey",
-    width: '300px',
-    height: '200px',
-}
-
-
-const ulStyle = {
-    listStyle: 'none'
-}
 
 
 function ImgDisplay({ photo }) {
-    if (photo && photo.hasOwnProperty("href")){
-        return (
-            <div className="img_container" style={imgContainer}>
-                <img style={imgStyle} src={photo.href}/>
-            </div>
-        )
-    }
-}
-
-function Description({ data, houseId }) {
-    const link = `/housing-list/${houseId}` 
-    let description_list = []
+    let img_src = "https://www.femtoscientific.com/wp-content/uploads/2014/12/default_image_01.png"
+    if (photo && photo.hasOwnProperty("href")) img_src = photo.href
     
-    for (let key in data) {
-        if(data[key]){
-            let name = key.replace("_", " ");    
-            let value = data[key].toString().replace("_", " ")
-            description_list.push( <li key={uuid()}>{name} : {value}</li> )
-        }
-    }
     return (
-        <div>
-            <ul style={ ulStyle }>
-                { description_list }
-                <Link to={link}>see more</Link>
-            </ul>
+        <div className={styles.img_container}>
+            <img className={styles.img_style} src={img_src}/>
         </div>
     )
 }
 
-export default function House({ data, houseId }) {
+function Description({ house_obj, houseId }) {
+    const link = `/housing-list/${houseId}` 
+    // <Link to={link}>see more</Link>
     return (
-        <>
-            <ImgDisplay photo={data.primary_photo}/>
-            <Description data={data.description} houseId={houseId}/>
-        </>
+        <ul className={styles.ul_style}>
+            <li className={styles.price_primary}>${integerToThousands(house_obj.list_price)}</li>
+            <li className={styles.secondary_details}>{getSpaceDetails(house_obj)}</li>
+            <li className={styles.secondary_details}>{getAddress(house_obj)}</li>
+        </ul>
+    )
+}
+
+export default function House({ house_obj, houseId }) {
+    return (
+        <div className={styles.container_card}>
+            <ImgDisplay photo={house_obj.primary_photo}/>
+            <Description house_obj={house_obj} houseId={houseId}/>
+        </div>
     )
 }
