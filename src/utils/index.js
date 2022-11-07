@@ -46,3 +46,19 @@ export const getUserGeolocation = async () => {
 export function integer_to_thousands(number) {
     return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+export function getSpaceDetails({description}) {
+    let house_space_information = ""
+    
+    house_space_information += `${description.beds} bds `
+    house_space_information += `| ${description.baths_full} ba `
+    
+    let sqrFeet = description.sqft ? 
+        `| ${integer_to_thousands(description.sqft)} sqft`
+        :
+        ""; 
+    
+    house_space_information += sqrFeet
+    
+    return house_space_information
+}
