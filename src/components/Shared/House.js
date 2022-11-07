@@ -31,7 +31,7 @@ function Description({ house_obj, houseId }) {
 
 export default function House({ house_obj, houseId }) {
     return (
-        <div>
+        <div className={styles.container_card}>
             <ImgDisplay photo={house_obj.primary_photo}/>
             <Description house_obj={house_obj} houseId={houseId}/>
         </div>

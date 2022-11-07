@@ -14,7 +14,7 @@
 
 .ul_style {
     list-style: none;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 .price_primary {
@@ -24,4 +24,9 @@
 
 .secondary_details {
     font-size: .8rem;
+    padding: 5px 0;
+}
+
+.container_card {
+    background-color: rgb(244, 244, 244)
 }
