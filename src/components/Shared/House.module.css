@@ -3,15 +3,25 @@
     width: 300px;
     height: 200px;
     object-fit: cover;
+    border-radius: 4px;
 }
 
 .img_container {
-    border: 1px solid lightgrey;
     width: 300px;
     height: 200px;
 }
 
 
 .ul_style {
-    list-style: none
+    list-style: none;
+    padding: 10px 0;
+}
+
+.price_primary {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.secondary_details {
+    font-size: .8rem;
 }

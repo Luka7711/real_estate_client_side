@@ -50,8 +50,8 @@ export function integerToThousands(number) {
 export function getSpaceDetails({description}) {
     let house_space_information = ""
     
-    house_space_information += `${description.beds} bds `
-    house_space_information += `| ${description.baths_full} ba `
+    house_space_information += `${description.beds ?? 0} bds `
+    house_space_information += `| ${description.baths_full ?? 0} ba `
     
     let sqrFeet = description.sqft ? 
         `| ${integerToThousands(description.sqft)} sqft`

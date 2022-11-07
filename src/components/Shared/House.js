@@ -20,12 +20,11 @@ function ImgDisplay({ photo }) {
 function Description({ house_obj, houseId }) {
     const link = `/housing-list/${houseId}` 
     // <Link to={link}>see more</Link>
-    console.log(house_obj)
     return (
-        <ul className={styles.ul_styles}>
-            <li>${integerToThousands(house_obj.list_price)}</li>
-            <li>{getSpaceDetails(house_obj)}</li>
-            <li>{getAddress(house_obj)}</li>
+        <ul className={styles.ul_style}>
+            <li className={styles.price_primary}>${integerToThousands(house_obj.list_price)}</li>
+            <li className={styles.secondary_details}>{getSpaceDetails(house_obj)}</li>
+            <li className={styles.secondary_details}>{getAddress(house_obj)}</li>
         </ul>
     )
 }
