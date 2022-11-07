@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './House.module.css'
+import { integer_to_thousands } from '../../utils';
 
 
 
@@ -17,12 +18,14 @@ function ImgDisplay({ photo }) {
     )
 }
 
-function Description({ data, houseId }) {
+function Description({ house_obj, houseId }) {
     const link = `/housing-list/${houseId}` 
     // <Link to={link}>see more</Link>
-
+    console.log(house_obj)
     return (
         <ul className={styles.ul_styles}>
+            <li>${integer_to_thousands(house_obj.list_price)}</li>
+            <li>{house_obj.description.beds} bds | {house_obj.description.baths_full} ba | {house_obj.description.sqft} sqft</li>
         </ul>
     )
 }
@@ -31,7 +34,7 @@ export default function House({ house_obj, houseId }) {
     return (
         <div>
             <ImgDisplay photo={house_obj.primary_photo}/>
-            <Description data={house_obj.description} houseId={houseId}/>
+            <Description house_obj={house_obj} houseId={houseId}/>
         </div>
     )
 }

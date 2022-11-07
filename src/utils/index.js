@@ -43,3 +43,6 @@ export const getUserGeolocation = async () => {
     }
 } 
 
+export function integer_to_thousands(number) {
+    return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
