@@ -8,7 +8,7 @@ import { getUserGeolocation } from '../utils';
     and then we dispatching action to the reducers manually 
  */
 
-export const fetchHouses = ({city, state}) => async dispatch => {
+export const fetchHouses = (city, state) => async dispatch => {
     const promise = await fetchHouseList(city, state);
     dispatch({ type: "FETCH_HOUSES", payload: promise });
 };

@@ -43,7 +43,3 @@ export const getUserGeolocation = async () => {
     }
 } 
 
-(async() => {
-    const response = await getUserGeolocation();
-    console.log(response)
-})();

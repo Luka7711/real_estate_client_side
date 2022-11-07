@@ -4,6 +4,7 @@ import { fetchHouses } from '../../actions';
 import uuid from 'react-uuid';
 import House from '../Shared/House';
 
+
 const housingAlbumContainer = {
     display: "grid",
     gridTemplateColumns: "repeat(4, 300px)",
@@ -14,39 +15,13 @@ const housingAlbumContainer = {
 }
 
 
-class HousingList extends React.Component {
+export default function HousingList({ houses }){
 
-    componentDidMount() {
-        console.log(this.props.location, 'location')
-        this.props.fetchHouses({ ...this.props.location });
-    }
+    const renderList = houses.map(house => <House key={uuid()} data={house} houseId={house['property_id']}/>)
 
-    renderList() {
-        if (this.props.houses.length > 0) {
-            return this.props.houses.map((data) => <House key={uuid()} data={data} houseId={data.property_id}/> ) 
-        }
-        else {
-            return  "Loading"
-        }
-    }
-
-    render() {
-        return (
-            <div style={housingAlbumContainer}>
-                { this.renderList() }
-            </div>
-        )
-    }
+    return (
+        <div style={housingAlbumContainer}>
+            {renderList}
+        </div>
+    )
 }
-
-const mapStateToProps = state => {
-    return {
-        houses: state.houses,
-        location: state.userGeolocation
-    }
-}
-
-export default connect(
-    mapStateToProps, 
-    { fetchHouses }
-)(HousingList);
