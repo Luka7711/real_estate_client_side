@@ -25,7 +25,7 @@ const Home = ({
         }
     }, [location]);
 
-    const renderedHouses = houses.slice(0, 8);
+    const renderedHouses = houses.slice(0, 9);
 
     return (
         <> 
