@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 const housingAlbumContainer = {
     width: "900px",
@@ -18,9 +20,10 @@ const leftBtn = {
     height: 'relative',
     top: '0',
     left: '0',
-    background: "blue",
+    background: "black",
     zIndex: '10',
-    height: '100%'
+    height: '100%',
+    opacity: '0.5'
 }
 
 const rightBtn = {
@@ -29,17 +32,67 @@ const rightBtn = {
     height: '100%',
     top: '0',
     left: '95%',
-    background: "blue",
+    background: "black",
     zIndex: '10',
-    height: '100%'
+    height: '100%',
+    opacity: '0.5'
 }
 
-export default function Carousel({children}) {
-    return (
-        <div style={housingAlbumContainer}> 
-            <div style={leftBtn}></div>
-            <div style={childContainer}> {children} </div>
-            <div style={rightBtn}></div>
-        </div>
-    )
+function Carousel({children, houses}) {
+    const [currentImg, setCurrentImg] = useState(null);
+    const [images, setImages] = useState([]);
+
+
+    const firstImgStyleOnMove = {
+        position: 'absolute',
+        left: "-300px"
+    }
+
+
+
+    useEffect(() => {
+        const imgs = document.getElementsByClassName("House_container_card__0AHZ9");
+        setImages(imgs);
+    }, [])
+
+
+    
+    useEffect(() => {
+        setCurrentImg(images[0])
+    },[images])
+
+
+
+    function slideLeft() {
+        return;
+    }
+
+    function slideRight() {
+        return;
+    }
+
+    if (houses) {
+        return (
+            <div style={housingAlbumContainer}> 
+                <div style={leftBtn} onClick={slideLeft}></div>
+                <div style={childContainer}> 
+                    {children} 
+                </div>
+                <div style={rightBtn} onClick={slideRight}></div>
+            </div>
+        )
+    } else {
+        return "Loading"
+    }
 }
+
+
+
+
+const mapStateToProps = state => {
+    return {
+        houses: state.houses
+    }
+}
+
+export default connect(mapStateToProps)(Carousel)

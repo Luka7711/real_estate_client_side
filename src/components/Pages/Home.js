@@ -29,6 +29,7 @@ const Home = ({
     }, [location]);
 
     const renderedHouses = houses.slice(0, 9);
+    
 
     return (
             <Carousel>
