@@ -6,18 +6,6 @@ import Carousel from "../Shared/Carousel";
 import HousingList from "./HousingList";
 
 
-const housingAlbumContainer = {
-    width: "900px",
-    overflow: 'hidden',
-    margin: '20px auto'
-}
-
-const childContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 8*340 + "px",
-}
 
 /* Display static houses */
 
