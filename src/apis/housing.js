@@ -1,11 +1,11 @@
-// import { houseData } from '../data';
+import { houseData } from '../data';
 
 export default async function fetchData(city, state){
     /*
         use static data, unless need to use 3rd party API
         data from Rapid API
     */
-    const houseData = null;
+
     if (houseData) {
         return houseData
     } else {

@@ -1,5 +1,8 @@
+import { faCropSimple } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import SlideBtn from '../Buttons/SlideBtn';
+
 
 const housingAlbumContainer = {
     width: "900px",
@@ -14,85 +17,50 @@ const childContainer = {
     width: 8*340 + "px",
 }
 
-const leftBtn = {
+const btnLeft = {
     position: 'absolute',
     width: "40px",
     height: 'relative',
     top: '0',
     left: '0',
-    background: "black",
+    backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: '10',
     height: '100%',
-    opacity: '0.5'
+    display: 'flex',
+    alignItems: 'center'
 }
 
-const rightBtn = {
+const btnRight = {
     position: 'absolute',
     width: "40px",
-    height: '100%',
+    height: 'relative',
     top: '0',
     left: '95%',
-    background: "black",
+    backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: '10',
     height: '100%',
-    opacity: '0.5'
+    display: 'flex',
+    alignItems: 'center'
 }
 
-function Carousel({children, houses}) {
-    const [currentImg, setCurrentImg] = useState(null);
-    const [images, setImages] = useState([]);
 
+export default function Carousel({children}) {
 
-    const firstImgStyleOnMove = {
-        position: 'absolute',
-        left: "-300px"
+    function handleSlide(direction) {
+        const carousel_container = document.querySelector('.carousel_child');
     }
-
-
-
-    useEffect(() => {
-        const imgs = document.getElementsByClassName("House_container_card__0AHZ9");
-        setImages(imgs);
-    }, [])
-
-
     
-    useEffect(() => {
-        setCurrentImg(images[0])
-    },[images])
-
-
-
-    function slideLeft() {
-        return;
-    }
-
-    function slideRight() {
-        return;
-    }
-
-    if (houses) {
-        return (
-            <div style={housingAlbumContainer}> 
-                <div style={leftBtn} onClick={slideLeft}></div>
-                <div style={childContainer}> 
-                    {children} 
-                </div>
-                <div style={rightBtn} onClick={slideRight}></div>
+    return (
+        <div style={housingAlbumContainer}> 
+            <SlideBtn icon={faArrowLeft} style={btnLeft} btnVal={'prev'} handleSlide={handleSlide}/>
+            <div style={childContainer} className="carousel_child"> 
+                { children } 
             </div>
-        )
-    } else {
-        return "Loading"
-    }
+            <SlideBtn icon={faArrowRight} style={btnRight} btnVal={'next'} handleSlide={handleSlide}/>
+        </div>
+    )
 }
 
 
 
 
-const mapStateToProps = state => {
-    return {
-        houses: state.houses
-    }
-}
-
-export default connect(mapStateToProps)(Carousel)
