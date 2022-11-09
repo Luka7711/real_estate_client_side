@@ -11,19 +11,13 @@ const housingAlbumContainer = {
     position: 'relative'
 }
 
-const childContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    width: 8*340 + "px",
-}
-
 const btnLeft = {
     position: 'absolute',
     width: "40px",
     height: 'relative',
     top: '0',
     left: '0',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
     zIndex: '10',
     height: '100%',
     display: 'flex',
@@ -45,18 +39,43 @@ const btnRight = {
 
 
 export default function Carousel({children}) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [length, setLength] = useState(null);
+    const next = "next";
+    const prev = "prev";
+
+    useEffect(() => {
+        setLength(children.props.houses.length);
+    }, [children]);
+
 
     function handleSlide(direction) {
-        const carousel_container = document.querySelector('.carousel_child');
+        if ( direction === next && currentIndex < (length - 3) ) {
+            setCurrentIndex(prevState => prevState + 1);
+            console.log('next')
+        }
+         else if (direction === prev && currentIndex > 0) {
+            setCurrentIndex(prevState => prevState -1);
+            console.log("previous")
+        }
     }
     
     return (
         <div style={housingAlbumContainer}> 
-            <SlideBtn icon={faArrowLeft} style={btnLeft} btnVal={'prev'} handleSlide={handleSlide}/>
-            <div style={childContainer} className="carousel_child"> 
+            <SlideBtn icon={faArrowLeft} style={btnLeft} btnVal={prev} handleSlide={handleSlide}/>
+            <div style={
+                {
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    width: 8 * 340 + "px",
+                    transform: `translateX(-${currentIndex * 300}px)`,
+                    transition: '0.3s'
+                }} 
+                className="carousel_child"
+            > 
                 { children } 
             </div>
-            <SlideBtn icon={faArrowRight} style={btnRight} btnVal={'next'} handleSlide={handleSlide}/>
+            <SlideBtn icon={faArrowRight} style={btnRight} btnVal={next} handleSlide={handleSlide}/>
         </div>
     )
 }
