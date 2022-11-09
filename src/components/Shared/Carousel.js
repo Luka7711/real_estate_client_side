@@ -47,12 +47,20 @@ export default function Carousel({children}) {
             setCarouselHovered(false);
         })
     }
-    
+
     
     useEffect(() => {
         setLength(children.props.houses.length);
         hoverBtnEffect();
+
+        return () => {
+            const carouselWrapper = document.querySelector(".main_carousel_container");
+            carouselWrapper.removeEventListener('mouseover');
+            carouselWrapper.addEventListener('mouseout');
+        }
+
     }, [children]);
+
 
 
     function handleSlide(direction) {
