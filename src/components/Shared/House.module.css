@@ -1,13 +1,13 @@
 
 .img_style {
-    width: 300px;
+    width: 290px;
     height: 200px;
     object-fit: cover;
     border-radius: 4px;
 }
 
 .img_container {
-    width: 300px;
+    width: 290px;
     height: 200px;
 }
 
@@ -28,5 +28,8 @@
 }
 
 .container_card {
-    background-color: rgb(244, 244, 244)
+    background-color: rgb(244, 244, 244);
+    width: 290px;
+    height: 307.73px;
+    margin: 0 5px;
 }

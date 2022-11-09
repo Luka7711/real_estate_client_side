@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { connect } from 'react-redux';
 import { fetchUserGeolocation } from '../../actions';
 import { fetchHouses } from "../../actions";
+import Carousel from "../Shared/Carousel";
 import HousingList from "./HousingList";
+
+
 
 /* Display static houses */
 
@@ -26,11 +29,12 @@ const Home = ({
     }, [location]);
 
     const renderedHouses = houses.slice(0, 9);
+    
 
     return (
-        <> 
-            <HousingList houses={renderedHouses}/>
-        </>
+            <Carousel>
+                <HousingList houses={renderedHouses}/>
+            </Carousel>
     )
 }
 
