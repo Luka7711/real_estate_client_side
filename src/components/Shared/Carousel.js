@@ -53,11 +53,11 @@ export default function Carousel({children}) {
         setLength(children.props.houses.length);
         hoverBtnEffect();
 
-        return () => {
-            const carouselWrapper = document.querySelector(".main_carousel_container");
-            carouselWrapper.removeEventListener('mouseover');
-            carouselWrapper.addEventListener('mouseout');
-        }
+        // return () => {
+        //     const carouselWrapper = document.querySelector(".main_carousel_container");
+        //     carouselWrapper.removeEventListener('mouseover');
+        //     carouselWrapper.addEventListener('mouseout');
+        // }
 
     }, [children]);
 

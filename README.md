@@ -1,42 +1,35 @@
-# Getting Started with Create React App
+# Real Estate web application (Zillow replication)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![alt languages count](https://img.shields.io/github/languages/count/luka7711/real_estate_client_side)
+![alt top language](https://img.shields.io/github/languages/top/luka7711/real_estate_client_side)
+![alt contributors](https://img.shields.io/github/contributors/luka7711/real_estate_client_side)
+![alt lastcommit](https://img.shields.io/github/last-commit/luka7711/real_estate_client_side)
+![alt repo size](https://img.shields.io/github/repo-size/luka7711/real_estate_client_side)
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+The Ziplow is replication of popular real estate application Zillow. I was motivated to replicate
+and rebuild application from scratch with React and Node with additional features.
+<br/>
+The main takeaways from this project were to learn how to:
 
-### `npm start`
+- Caintain complex React states using Redux library
+- Build reusable React components
+- Write unit and integration tests
+- Integrate analytical data in charts and graphs
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of contents
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Instructions
 
-### `npm test`
+## Instructions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-
+1. Fork this repository
+1. Clone your forked repository
+1. Install packages:
+   <br/>
+   - Navigate to root directory in terminal.
+   - Run:
+     <br/>
+     - `npm install`
+     - `npm start`
