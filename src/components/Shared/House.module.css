@@ -1,13 +1,17 @@
 
+:root {
+    --carousel-each-house-width: 290px
+}
+
 .img_style {
-    width: 290px;
+    width: var(--carousel-each-house-width);
     height: 200px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 3px 3px 0 0;
 }
 
 .img_container {
-    width: 290px;
+    width: var(--carousel-each-house-width);
     height: 200px;
 }
 
@@ -29,7 +33,6 @@
 
 .container_card {
     background-color: rgb(244, 244, 244);
-    width: 290px;
+    width: var(--carousel-each-house-width);
     height: 307.73px;
-    margin: 0 5px;
 }
