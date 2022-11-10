@@ -1,4 +1,4 @@
-# Ziplow is a Real Estate web application (Zillow replication)
+# Real Estate web application (Zillow replication)
 
 ![alt languages count](https://img.shields.io/github/languages/count/luka7711/real_estate_client_side)
 ![alt top language](https://img.shields.io/github/languages/top/luka7711/real_estate_client_side)
