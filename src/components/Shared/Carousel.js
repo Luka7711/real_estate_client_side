@@ -32,11 +32,33 @@ export default function Carousel({children}) {
     let childCarousel = {
         display: 'flex', 
         flexDirection: 'row', 
-        width: 8 * 340 + "px",
         transform: `translateX(-${currentIndex * 300}px)`,
-        transition: '0.3s'
+        transition: '0.3s',
+        width: (() => {
+            let houseImgContainerWidth = getComputedStyle(document.documentElement).getPropertyValue('--carousel-each-house-width');
+            houseImgContainerWidth = parseInt(houseImgContainerWidth.replace("px", ""))
+            let totalWidth = (houseImgContainerWidth * length) + (length * 10) + "px";
+            return totalWidth;
+        })(),
+        justifyContent: 'space-between'
     }
 
+
+
+    
+    useEffect(() => {
+        setLength(children.props.houses.length);
+        hoverBtnEffect();
+
+        return () => {
+            if(children.length) {
+                const carouselWrapper = document.querySelector(".main_carousel_container");
+                carouselWrapper.removeEventListener('mouseover');
+                carouselWrapper.addEventListener('mouseout');
+            }
+        }
+
+    }, [children]);
 
     function hoverBtnEffect() {
         const carouselWrapper = document.querySelector(".main_carousel_container");
@@ -47,20 +69,6 @@ export default function Carousel({children}) {
             setCarouselHovered(false);
         })
     }
-
-    
-    useEffect(() => {
-        setLength(children.props.houses.length);
-        hoverBtnEffect();
-
-        // return () => {
-        //     const carouselWrapper = document.querySelector(".main_carousel_container");
-        //     carouselWrapper.removeEventListener('mouseover');
-        //     carouselWrapper.addEventListener('mouseout');
-        // }
-
-    }, [children]);
-
 
 
     function handleSlide(direction) {
