@@ -11,6 +11,7 @@ const housingAlbumContainer = {
 }
 
 export default function Carousel({children}) {
+    
     const [currentIndex, setCurrentIndex] = useState(0);
     const [length, setLength] = useState(null);
     const [isCarouselHovered, setCarouselHovered] = useState(false);
@@ -47,6 +48,7 @@ export default function Carousel({children}) {
 
     
     useEffect(() => {
+
         setLength(children.props.houses.length);
         hoverBtnEffect();
 
@@ -60,24 +62,33 @@ export default function Carousel({children}) {
 
     }, [children]);
 
+
+
     function hoverBtnEffect() {
+
         const carouselWrapper = document.querySelector(".main_carousel_container");
+
         carouselWrapper.addEventListener('mouseover', () => {
             setCarouselHovered(true)
         });
+
         carouselWrapper.addEventListener('mouseout', () => {
             setCarouselHovered(false);
         })
+
     }
 
 
     function handleSlide(direction) {
+
         if ( direction === next && currentIndex < (length - 3) ) {
             setCurrentIndex(prevState => prevState + 1);
         }
-         else if (direction === prev && currentIndex > 0) {
+
+        else if (direction === prev && currentIndex > 0) {
             setCurrentIndex(prevState => prevState -1);
         }
+
     }
     
     return (
