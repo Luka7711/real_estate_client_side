@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from 'react-redux';
 import { fetchUserGeolocation } from '../../actions';
 import { fetchHouses } from "../../actions";
 import Carousel from "../Shared/Carousel";
 import HousingList from "./HousingList";
+import HomeSearchbarHolder from "../Shared/HomeSearchbarHolder";
 
 
 
@@ -17,6 +18,7 @@ const Home = ({
     }) => {
 
     useEffect(() => {
+
         window.addEventListener('load', () => {
             fetchUserGeolocation();
         })
@@ -26,20 +28,18 @@ const Home = ({
         return () => {
             window.removeEventListener('load', fetchUserGeolocation);
         }
+
     }, [location]);
 
-    const renderedHouses = houses.slice(0, 9);
-    
-
     return (
-            <Carousel>
-                <HousingList houses={renderedHouses}/>
-            </Carousel>
+            <React.Fragment>
+                <HomeSearchbarHolder/>
+                <Carousel>     
+                    <HousingList houses={houses.slice(0, 12)}/> 
+                </Carousel>
+            </React.Fragment>
     )
 }
-
-
-
 
 
 

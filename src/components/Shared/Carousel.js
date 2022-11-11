@@ -48,7 +48,6 @@ export default function Carousel({children}) {
 
     
     useEffect(() => {
-
         setLength(children.props.houses.length);
         hoverBtnEffect();
 
