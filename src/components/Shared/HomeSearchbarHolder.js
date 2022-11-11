@@ -10,6 +10,7 @@ const main = {
     backgroundPosition: 'center'
 }
 
+
 export default function HomeSearchbarHolder() {
     return (
         <main style={main}>
