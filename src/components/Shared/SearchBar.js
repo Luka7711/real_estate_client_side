@@ -1,6 +1,7 @@
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Icon from "./Icons"
-import { faMagnifyingGlassLocation } from '@fortawesome/free-solid-svg-icons';
-import React from "react";
+import React, { useState } from "react";
+
 
 
 
@@ -35,12 +36,30 @@ const inputBox = {
 
 
 export default function SearchBar() {
+    const [address, setAddress] = useState("")
+
+    function handleChange(event) {
+        setAddress(event.target.value)
+    }
+
+    function disableFocus(event) {
+        event.target.style.outline = "none"
+    }
+
     return (
             <React.Fragment>
                 <form style={formContainer} >
-                    <input style={inputBox} autofocus="autofocus" type="text" placeholder="city" value="" onChange={() => ""}/>
+                    <input 
+                        className='searchmain' 
+                        onFocus={disableFocus} 
+                        style={inputBox} 
+                        type="text" 
+                        placeholder="Stree address, city, zipcode" 
+                        value={address}
+                        onChange={handleChange}
+                    />
                     <span style={iconContainer}>
-                        <Icon icon={faMagnifyingGlassLocation} />
+                        <Icon icon={faMagnifyingGlass} />
                     </span>
                 </form>
             </React.Fragment>

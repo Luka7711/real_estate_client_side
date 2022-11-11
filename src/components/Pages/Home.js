@@ -22,7 +22,6 @@ const Home = ({
         window.addEventListener('load', () => {
             fetchUserGeolocation();
         })
-        
         if (location) fetchHouses(location.city, location.state);
 
         return () => {
