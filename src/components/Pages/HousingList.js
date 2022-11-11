@@ -5,12 +5,15 @@ import House from '../Shared/House';
 
 
 export default function HousingList({ houses }){
-
-    const renderList = houses.map(house => <House key={uuid()} house_obj={house} houseId={house['property_id']}/>)
-
-    return (
-        <>
-            { renderList }
-        </>
-    )
+    return houses.map(house => {
+        return (
+                <React.Fragment key={uuid()}>
+                    <House 
+                        house_obj={house} 
+                        houseId={house['property_id']}
+                    />
+                </React.Fragment>
+        )
+    })
 }
+
