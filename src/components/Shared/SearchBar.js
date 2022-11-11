@@ -54,7 +54,7 @@ export default function SearchBar() {
                         onFocus={disableFocus} 
                         style={inputBox} 
                         type="text" 
-                        placeholder="Stree address, city, zipcode" 
+                        placeholder="Enter city, state, neighborhood or zip code" 
                         value={address}
                         onChange={handleChange}
                     />
