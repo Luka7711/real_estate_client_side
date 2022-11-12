@@ -1,6 +1,6 @@
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Icon from "./Icons"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 
@@ -35,7 +35,7 @@ const inputBox = {
 
 
 
-export default function SearchBar() {
+export default function SearchBar({searchHouses}) {
     const [address, setAddress] = useState("")
 
     function handleChange(event) {
@@ -46,9 +46,16 @@ export default function SearchBar() {
         event.target.style.outline = "none"
     }
 
+    useEffect(() => {
+        return () => setAddress("");
+    }, [])
+
     return (
             <React.Fragment>
-                <form style={formContainer} >
+                <form 
+                    style={formContainer} 
+                    onSubmit={(event) => searchHouses(event, address)}
+                >
                     <input 
                         className='searchmain' 
                         onFocus={disableFocus} 

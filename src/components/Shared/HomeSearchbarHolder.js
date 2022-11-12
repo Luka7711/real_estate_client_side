@@ -19,10 +19,29 @@ const searchWrapper = {
 }
 
 export default function HomeSearchbarHolder() {
+    
+    /**
+     * Validates search params and gets houses
+     */
+    
+    async function validateParamsAndGetHouses(event, address) {
+        event.preventDefault();
+
+        try {
+
+            const { city, state } = getCityAndState(address);  
+
+        } catch(err) {
+
+            console.log(err);
+
+        }
+    }
+
     return (
         <main style={main}>
             <section style={searchWrapper}>
-                <SearchBar/>
+                <SearchBar searchHouses={validateParamsAndGetHouses}/>
             </section>
         </main>
     )
