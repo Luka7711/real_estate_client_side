@@ -1,3 +1,4 @@
+import { getCityAndState } from "../../utils";
 import SearchBar from "./SearchBar";
 import ImgMain from '../../images/realestate.jpg'
 
@@ -29,7 +30,8 @@ export default function HomeSearchbarHolder() {
 
         try {
 
-            const { city, state } = getCityAndState(address);  
+            const { city, state, neighborhood, zipcode } = await getCityAndState(address);  
+            // city && state ?? make api call : can't find anything
 
         } catch(err) {
 
