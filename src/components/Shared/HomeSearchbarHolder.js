@@ -30,7 +30,8 @@ export default function HomeSearchbarHolder() {
 
         try {
 
-            // const { city, state, neighborhood, zipcode } = await getCityAndState(address);  
+            // const { city, state, location } = await getCityAndState(address);  
+            // UPDATE state of search CITY and STATE_ID
             getCityAndState(address)
             // city && state ?? make api call : can't find anything
 

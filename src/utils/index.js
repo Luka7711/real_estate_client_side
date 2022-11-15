@@ -83,13 +83,13 @@ export async function getCityAndState(params) {
 
     // if zip code is presented find City and State
     const zipCode = getZipcode(params);
-
+    console.log(zipCode, 'zipcode')
     if (zipCode) {
 
         // return City and State of given zipcode from DATABASE
         const url = `${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`
         const response = await fetch(url);
-        const parsedResponse = await response.json()
+        const parsedResponse = await response.json();
 
     } else {
         
@@ -100,64 +100,85 @@ export async function getCityAndState(params) {
             onlyNeighborhood: false
         }
         
-        const city = getValidatedParams("cities");
-        const state_id = getValidatedParams("state");
-        const neighborhood = getValidatedParams("neighborhood");
-        
+        const city = getMatchedLocation(usCities, params);
+        const state_id = getMatchedLocation(usStates, params);
+        const neighborhood = getMatchedLocation(usNeighborhoods, params);
         
         paramCombination['cityAndState'] = city !== null && state_id !== null ;
         paramCombination['onlyCity'] = city !== null && state_id === null;
         paramCombination['onlyState'] = city === null && state_id !== null;
         paramCombination['onlyNeighborhood'] = city === null && state_id === null && neighborhood !== null;
         
-        console.log(paramCombination, "param combination")
+        console.log(paramCombination, "param")
     }
 
 
-    function getValidatedParams(dataType) {
 
-        switch (dataType) {
-            case "cities":
-                
-                let foundCity = null;
 
-                params.forEach((param, i) => {
-                    
-                    let cityIndex = usCities.findIndex(uscity => uscity.toLowerCase() === param.toLowerCase());
+    function getMatchedLocation(locationData, userInput) {
 
-                    if(cityIndex > -1) {
-                        foundCity = usCities[cityIndex];
-                        params.splice(i, 1)
-                    }
+        let foundLocation = null;
 
-                });
-                return foundCity;
+        userInput.forEach((inputStr, index) => {
             
-            case "state":
-                
-                let foundState = null;
+            let matchedLocationIndex = locationData.findIndex(location => location.toLowerCase() === inputStr.toLowerCase());
 
-                params.forEach((param, i) => {
-                    let stateIndex = usStates.findIndex(usState => usState.toLowerCase() === param.toLowerCase());
-                    
-                    if (stateIndex > -1) {
-                        foundState = usStates[stateIndex];
-                        params.splice(i, 1);
-                    }
-                })
+            if (matchedLocationIndex > -1) {
+                foundLocation = locationData[matchedLocationIndex];
+                userInput.splice(index, 1)
+            }
 
-                return foundState;
-            
-            default:
-                
-                return null;
+        });
 
-        }
+        return foundLocation;
+    
     }
+
+
+    // function getValidatedParams(dataType, params) {
+
+    //     switch (dataType) {
+    //         case "cities":
+                
+    //             let foundCity = null;
+
+    //             params.forEach((param, i) => {
+                    
+    //                 let cityIndex = usCities.findIndex(uscity => uscity.toLowerCase() === param.toLowerCase());
+
+    //                 if(cityIndex > -1) {
+    //                     foundCity = usCities[cityIndex];
+    //                     params.splice(i, 1)
+    //                 }
+
+    //             });
+    //             return foundCity;
+            
+    //         case "state":
+                
+    //             let foundState = null;
+
+    //             params.forEach((param, i) => {
+    //                 let stateIndex = usStates.findIndex(usState => usState.toLowerCase() === param.toLowerCase());
+                    
+    //                 if (stateIndex > -1) {
+    //                     foundState = usStates[stateIndex];
+    //                     params.splice(i, 1);
+    //                 }
+    //             })
+
+    //             return foundState;
+            
+    //         default:
+                
+    //             return null;
+
+    //     }
+    // }
 
     function getZipcode(params) {
         let [zip] = params.filter(param => {
-            return typeof(parseInt(param)) === "number" && param.length === 5;
+            return !isNaN(parseFloat(param)) && param.length === 5;
         });
 
         return zip;
