@@ -5,15 +5,15 @@ export default async function getSearchLocation(city, state, neighborhood) {
     
     const options = {
         method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/cities`,
+        url: `${process.env.REACT_APP_SERVER_URL}/cities/location`,
         params: {
-            city: city,
-            state: state,
-            neighborhood: neighborhood
+            city: city ?? "",
+            state: state ?? "",
+            neighborhood: neighborhood ?? ""
         }
     }
     
     const response = await axios.request(options);
-    const parsedResponse = response.json();
+    const parsedResponse = await response.json();
     return parsedResponse;
 }
