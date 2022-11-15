@@ -1,5 +1,5 @@
 import { usCities, usStates, usNeighborhoods} from '../data';
-const axios = require('axios');
+
 
 export async function getCityAndState(params) {
     // return city, state, neighborhood and zipcode
@@ -28,7 +28,7 @@ export async function getCityAndState(params) {
         
         else if (!noResults) {
 
-            const response = await gitSearchLocation(city, state_id, neighborhood);
+            const response = await getSearchLocation(city, state_id, neighborhood);
             return response;
         } 
 
