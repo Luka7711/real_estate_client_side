@@ -1,4 +1,4 @@
-import { getCityAndState } from "../../utils";
+import { getCityAndState } from "../../utils/searchEngine";
 import SearchBar from "./SearchBar";
 import ImgMain from '../../images/realestate.jpg'
 
