@@ -5907,8 +5907,3 @@ export const usStates = ["IL", "NY", "CA"];
 export const usNeighborhoods = ["Cook", "Bronx"];
 
 
-
-const usAddresses = [
-    {city: "New York", state: "NY", zipcodes: ["10035", "11235"]},
-    {city: "Chicago", state: "IL", zipcodes: ["60635", "60641"]}
-]

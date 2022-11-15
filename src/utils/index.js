@@ -1,6 +1,7 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
 import { usCities, usStates, usNeighborhoods} from '../data';
+import axios from 'axios';
 
 // get state and city data
 export const getUserGeolocation = async () => {
@@ -75,7 +76,7 @@ export function getAddress({location}) {
 }
 
 
-export function getCityAndState(params) {
+export async function getCityAndState(params) {
     // return city, state, neighborhood and zipcode
     params = params.replace(/[\[\]&]+/g, '');
     params = params.split(" ");
@@ -86,6 +87,9 @@ export function getCityAndState(params) {
     if (zipCode) {
 
         // return City and State of given zipcode from DATABASE
+        const url = `${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`
+        const response = await fetch(url);
+        const parsedResponse = await response.json()
 
     } else {
         
@@ -99,13 +103,14 @@ export function getCityAndState(params) {
         const city = getValidatedParams("cities");
         const state_id = getValidatedParams("state");
         const neighborhood = getValidatedParams("neighborhood");
-
+        
+        
         paramCombination['cityAndState'] = city !== null && state_id !== null ;
         paramCombination['onlyCity'] = city !== null && state_id === null;
         paramCombination['onlyState'] = city === null && state_id !== null;
         paramCombination['onlyNeighborhood'] = city === null && state_id === null && neighborhood !== null;
         
-        console.log(paramCombination)
+        console.log(paramCombination, "param combination")
     }
 
 
@@ -142,6 +147,10 @@ export function getCityAndState(params) {
                 })
 
                 return foundState;
+            
+            default:
+                
+                return null;
 
         }
     }
