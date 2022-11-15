@@ -45,9 +45,17 @@ export const getUserGeolocation = async () => {
     }
 } 
 
+
+
+
+
 export function integerToThousands(number) {
     return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+
+
 
 export function getSpaceDetails({description}) {
     let house_space_information = ""
@@ -76,6 +84,11 @@ export function getAddress({location}) {
 }
 
 
+
+
+
+
+
 export async function getCityAndState(params) {
     // return city, state, neighborhood and zipcode
     params = params.replace(/[\[\]&]+/g, '');
@@ -83,12 +96,11 @@ export async function getCityAndState(params) {
 
     // if zip code is presented find City and State
     const zipCode = getZipcode(params);
-    console.log(zipCode, 'zipcode')
-    if (zipCode) {
 
+    if (zipCode) {
+        
         // return City and State of given zipcode from DATABASE
-        const url = `${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`
-        const response = await fetch(url);
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`)
         const parsedResponse = await response.json();
 
     } else {
@@ -104,12 +116,13 @@ export async function getCityAndState(params) {
         const state_id = getMatchedLocation(usStates, params);
         const neighborhood = getMatchedLocation(usNeighborhoods, params);
         
-        paramCombination['cityAndState'] = city !== null && state_id !== null ;
-        paramCombination['onlyCity'] = city !== null && state_id === null;
-        paramCombination['onlyState'] = city === null && state_id !== null;
-        paramCombination['onlyNeighborhood'] = city === null && state_id === null && neighborhood !== null;
+        paramCombination['cityAndState'] = city && state_id ? true : false;
+        paramCombination['onlyCity'] = city && !state_id ? true : false;
+        paramCombination['onlyState'] = !city && state_id ? true : false;
+        paramCombination['onlyNeighborhood'] = !city && !state_id && neighborhood ? true : false;
         
-        console.log(paramCombination, "param")
+        console.log(paramCombination)
+
     }
 
 
@@ -135,46 +148,6 @@ export async function getCityAndState(params) {
     }
 
 
-    // function getValidatedParams(dataType, params) {
-
-    //     switch (dataType) {
-    //         case "cities":
-                
-    //             let foundCity = null;
-
-    //             params.forEach((param, i) => {
-                    
-    //                 let cityIndex = usCities.findIndex(uscity => uscity.toLowerCase() === param.toLowerCase());
-
-    //                 if(cityIndex > -1) {
-    //                     foundCity = usCities[cityIndex];
-    //                     params.splice(i, 1)
-    //                 }
-
-    //             });
-    //             return foundCity;
-            
-    //         case "state":
-                
-    //             let foundState = null;
-
-    //             params.forEach((param, i) => {
-    //                 let stateIndex = usStates.findIndex(usState => usState.toLowerCase() === param.toLowerCase());
-                    
-    //                 if (stateIndex > -1) {
-    //                     foundState = usStates[stateIndex];
-    //                     params.splice(i, 1);
-    //                 }
-    //             })
-
-    //             return foundState;
-            
-    //         default:
-                
-    //             return null;
-
-    //     }
-    // }
 
     function getZipcode(params) {
         let [zip] = params.filter(param => {
