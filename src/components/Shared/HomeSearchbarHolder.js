@@ -30,14 +30,13 @@ export default function HomeSearchbarHolder() {
 
         try {
 
-            // const { city, state, location } = await getCityAndState(address);  
-            // UPDATE state of search CITY and STATE_ID
-            getCityAndState(address)
-            // city && state ?? make api call : can't find anything
-
+            const { city, state_id, location } = await getCityAndState(address);  
+            // update search location state
+            console.log(city, state_id, location);
+            
         } catch(err) {
 
-            console.log(err);
+            console.log("could not find any location");
 
         }
     }

@@ -1,11 +1,11 @@
 const axios = require('axios');
 
 
-export default async function getSearchLocation(city, state, neighborhood) {
-    
+export default async function getFullAddress(city, state, neighborhood) {
+
     const options = {
         method: "GET",
-        url: `${process.env.REACT_APP_SERVER_URL}/cities/location`,
+        url: `${process.env.REACT_APP_SERVER_URL}/cities/location-search`,
         params: {
             city: city ?? "",
             state: state ?? "",
@@ -14,6 +14,9 @@ export default async function getSearchLocation(city, state, neighborhood) {
     }
     
     const response = await axios.request(options);
-    const parsedResponse = await response.json();
-    return parsedResponse;
+    
+    if (response.status === 200 && response.data) {
+        return response['data']
+    }
+    return null;
 }
