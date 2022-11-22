@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { geolocationReducer } from './userReducer';
+import { searchReducer } from './searchReducer';
 import housingReducer from './housesReducer';
-import searchReducer from './searchReducer';
 
 
 

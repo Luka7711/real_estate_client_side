@@ -1,8 +1,8 @@
 
 
-const searchReducer = (state = null, action) => {
+export const searchReducer = (state = null, action) => {
     
-    switch (key.type) {
+    switch (action.type) {
         case "UPDATE_LOCATION":
             return action.payload;
         default:
@@ -10,4 +10,3 @@ const searchReducer = (state = null, action) => {
     }
 }
 
-export default searchReducer;
