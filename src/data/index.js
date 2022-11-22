@@ -5902,8 +5902,8 @@ export const defaultUserLocation = {
     state: "CA"
 }
 
-export const usCities = ["Chicago", "New york", "Los Angeles"];
-export const usStates = ["IL", "NY", "CA"];
+export const usCities = ["Chicago", "New York", "Los Angeles", "Paris"];
+export const usStates = ["IL", "NY", "CA", "TX"];
 export const usNeighborhoods = ["Cook", "Bronx"];
 
 

@@ -1,41 +1,55 @@
 import { usCities, usStates, usNeighborhoods} from '../data';
-
+import getFullAddress from '../apis/searchCityState';
 
 export async function getCityAndState(params) {
-    // return city, state, neighborhood and zipcode
-    params = params.replace(/[\[\]&]+/g, '');
-    params = params.split(" ");
 
-    // if zip code is presented find City and State
-    const zipCode = getZipcode(params);
+    let params_string = params.replace(/[\[\]&]+/g, '');
+    let splitted_params_string = params.split(" ");
+    const zipCode = getZipcode(splitted_params_string);
 
     if (zipCode) {
-
-        // return City and State of given zipcode from DATABASE
+        
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`)
         const parsedResponse = await response.json();
 
     } else {
         
-        const city = getMatchedLocation(usCities, params);
-        const state_id = getMatchedLocation(usStates, params);
-        const neighborhood = getMatchedLocation(usNeighborhoods, params);
+        const city = getMatchedCity(usCities, params_string);
+        const state_id = getMatchedLocation(usStates, splitted_params_string);
+        const neighborhood = getMatchedLocation(usNeighborhoods, splitted_params_string);
 
-        const noResults = !city && !state_id && !neighborhood ? true : false;
-        const isCityAndStateFound = city && state_id ? true : false;
+        if (city && state_id) {
 
-        if (isCityAndStateFound) return { city, state_id } 
-        
-        else if (!noResults) {
+            return { city, state_id } 
 
-            const response = await getSearchLocation(city, state_id, neighborhood);
+        } else if (!city && !state_id && !neighborhood) {
+
+            const response = await getFullAddress(city, state_id, neighborhood);
             return response;
-        } 
 
-        else {
-            return null;
         }
+
+        return null;
     }
+
+
+
+    function getMatchedCity(locationData, userInput) {
+        
+        let matchedCity = locationData.filter(city => {
+
+            let searchedCityRegex = new RegExp(`${city}`, 'gi');
+            
+            let match = userInput.match(searchedCityRegex);
+
+            return match && city.toLowerCase() === match[0].toLowerCase()
+
+        });
+
+        if (matchedCity.length) return matchedCity[0];
+
+        return null;
+    };
 
 
 
