@@ -1,6 +1,7 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
 
+
 // get state and city data
 export const getUserGeolocation = async () => {
     const getCoords = async () => {
@@ -43,9 +44,17 @@ export const getUserGeolocation = async () => {
     }
 } 
 
+
+
+
+
 export function integerToThousands(number) {
     return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+
+
 
 export function getSpaceDetails({description}) {
     let house_space_information = ""
@@ -72,3 +81,9 @@ export function getAddress({location}) {
     }
     return address.slice(0, -2)
 }
+
+
+
+
+
+

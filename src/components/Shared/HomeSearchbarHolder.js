@@ -1,3 +1,4 @@
+import { getCityAndState } from "../../utils/searchEngine";
 import SearchBar from "./SearchBar";
 import ImgMain from '../../images/realestate.jpg'
 
@@ -19,10 +20,31 @@ const searchWrapper = {
 }
 
 export default function HomeSearchbarHolder() {
+    
+    /**
+     * Validates search params and gets houses
+     */
+    
+    async function validateParamsAndGetHouses(event, address) {
+        event.preventDefault();
+
+        try {
+
+            const { city, state_id, location } = await getCityAndState(address);  
+            // update search location state
+            console.log(city, state_id, location);
+            
+        } catch(err) {
+
+            console.log("could not find any location");
+
+        }
+    }
+
     return (
         <main style={main}>
             <section style={searchWrapper}>
-                <SearchBar/>
+                <SearchBar searchHouses={validateParamsAndGetHouses}/>
             </section>
         </main>
     )

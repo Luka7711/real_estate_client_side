@@ -5901,3 +5901,9 @@ export const defaultUserLocation = {
     city: "Los Angeles",
     state: "CA"
 }
+
+export const usCities = ["Chicago", "New York", "Los Angeles", "Paris", "Milwaukee", "New Jersey", "Pittsburgh", "Las Vegas"];
+export const usStates = ["IL", "NY", "CA", "TX", "MI"];
+export const usNeighborhoods = ["Cook", "Bronx"];
+
+
