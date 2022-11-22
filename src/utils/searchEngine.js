@@ -3,12 +3,12 @@ import getFullAddress from '../apis/searchCityState';
 
 export async function getCityAndState(params) {
 
-    let params_string = params.replace(/[\[\]&]+/g, '');
-    let splitted_params_string = params.split(" ");
+    const params_string = params.replace(/[\[\]&]+/g, '');
+    const splitted_params_string = params.split(" ");
     const zipCode = getZipcode(splitted_params_string);
 
     if (zipCode) {
-        
+
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cities/${zipCode}`)
         const parsedResponse = await response.json();
 
