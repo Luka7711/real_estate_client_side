@@ -1,6 +1,9 @@
 import { getCityAndState } from "../../utils/searchEngine";
+import { updateSearchLocation } from '../../actions/index';
+import { connect } from "react-redux";
+import { useEffect } from 'react';
 import SearchBar from "./SearchBar";
-import ImgMain from '../../images/realestate.jpg'
+import ImgMain from '../../images/realestate.jpg';
 
 const main = {
     width: "100%",
@@ -19,8 +22,12 @@ const searchWrapper = {
     height: "60px",
 }
 
-export default function HomeSearchbarHolder() {
+function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
     
+
+    useEffect(() => {
+        console.log(searchLocation, "search location")
+    })
     /**
      * Validates search params and gets houses
      */
@@ -30,13 +37,12 @@ export default function HomeSearchbarHolder() {
 
         try {
 
-            const { city, state_id, location } = await getCityAndState(address);  
-            // update search location state
-            console.log(city, state_id, location);
-            
-        } catch(err) {
+            const response = await getCityAndState(address); 
+            updateSearchLocation(response);
 
-            console.log("could not find any location");
+        } catch(err) {
+            
+            console.log(err);
 
         }
     }
@@ -49,3 +55,12 @@ export default function HomeSearchbarHolder() {
         </main>
     )
 }
+
+
+const mapStateToProps = state => {
+    return {
+        searchLocation: state['searchLocation']
+    }
+}
+
+export default connect(mapStateToProps, { updateSearchLocation })(HomeSearchbarHolder)

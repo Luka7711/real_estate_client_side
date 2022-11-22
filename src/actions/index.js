@@ -20,3 +20,6 @@ export const fetchUserGeolocation = () => async dispatch => {
 }
 
 
+export const updateSearchLocation = (location) => dispatch => {
+    dispatch({ type: "UPDATE_LOCATION", payload: location });
+};
