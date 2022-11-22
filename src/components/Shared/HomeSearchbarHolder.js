@@ -28,9 +28,6 @@ function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
     useEffect(() => {
         console.log(searchLocation, "search location")
     })
-    /**
-     * Validates search params and gets houses
-     */
     
     async function validateParamsAndGetHouses(event, address) {
         event.preventDefault();
@@ -41,7 +38,7 @@ function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
             updateSearchLocation(response);
 
         } catch(err) {
-            
+
             console.log(err);
 
         }
