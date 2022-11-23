@@ -30,10 +30,19 @@ function Description({ house_obj, houseId }) {
 }
 
 export default function House({ house_obj, houseId }) {
-    return (
-        <div className={styles.container_card}>
-            <ImgDisplay photo={house_obj.primary_photo}/>
-            <Description house_obj={house_obj} houseId={houseId}/>
-        </div>
-    )
+    console.log(house_obj, "HOUSE OBJECT")
+    if (house_obj.description === undefined || house_obj.location === undefined) {
+    
+        return null
+    
+    } else {
+
+        return (
+            <div className={styles.container_card}>
+                <ImgDisplay photo={house_obj.primary_photo}/>
+                <Description house_obj={house_obj} houseId={houseId}/>
+            </div>
+        )
+
+    }
 }

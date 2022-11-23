@@ -17,7 +17,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
         } else {
 
-            setRenderedHouses([houses]);
+            setRenderedHouses(houses);
 
         }
 

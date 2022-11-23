@@ -60,25 +60,31 @@ export function integerToThousands(number) {
 
 export function getSpaceDetails({ description }) {
 
-    let beds = "beds" in description ? description.beds : 0;
+    let beds = "beds" in description && description.beds !== null ? description.beds : 0;
     let baths = "baths_full" in description ? description.baths_full : 0;
     let space = "sqft" in description && description['sqft'] !== null ? ` | ${integerToThousands(description.sqft)} sqft` : "";
-    
     let houseDetails = "".concat(beds, " beds | ", baths, " ba ", space)
 
     return houseDetails;
+
 }
 
 export function getAddress({location}) {
+
     const keys = ['line', 'city', 'state_code', 'postal_code'];
     let address = "";
 
     for (let key of keys) {
+
         if (key in location['address']) {
+
             address += location['address'][key] + ", "
+
         }
     }
+
     return address.slice(0, -2)
+
 }
 
 
