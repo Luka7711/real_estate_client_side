@@ -1,10 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { cleanupSearchLocation } from "../../actions";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
 
-const Buy = ({ houses, geolocation, searchLocation }) => {
+const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     const [renderedHouses, setRenderedHouses] = useState([]);
     
@@ -17,11 +18,16 @@ const Buy = ({ houses, geolocation, searchLocation }) => {
         } else {
 
             setRenderedHouses([houses]);
-            
+
+        }
+
+        return () => {
+            cleanupSearchLocation();
         }
 
     }, []);
     
+
 
     const updateRenderedHouses = async() => {
         const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
@@ -37,11 +43,12 @@ const Buy = ({ houses, geolocation, searchLocation }) => {
 }
 
 const mapStateToProps = state => {
+
     return {
-        geolocation: state.userGeolocation,
         searchLocation: state.searchLocation,
         houses: state.houses
     }
+
 }
 
-export default connect(mapStateToProps, { fetchHouses })(Buy)
+export default connect(mapStateToProps, { fetchHouses, cleanupSearchLocation })(Buy)
