@@ -1,5 +1,6 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
+import { faLocationPin } from '@fortawesome/free-solid-svg-icons';
 
 
 // get state and city data
@@ -49,7 +50,8 @@ export const getUserGeolocation = async () => {
 
 
 export function integerToThousands(number) {
-    return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    if (number) return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return " - - - -"
 }
 
 
@@ -77,7 +79,9 @@ export function getAddress({location}) {
     let address = "";
 
     for (let key of keys) {
-        address += location['address'][key] + ", "
+        if (key in location['address']) {
+            address += location['address'][key] + ", "
+        }
     }
     return address.slice(0, -2)
 }

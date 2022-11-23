@@ -24,11 +24,6 @@ const searchWrapper = {
 
 function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
     
-
-    useEffect(() => {
-        console.log(searchLocation, "search location")
-    })
-    
     async function validateParamsAndGetHouses(event, address) {
         event.preventDefault();
 
@@ -38,7 +33,7 @@ function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
             updateSearchLocation(response);
 
         } catch(err) {
-
+            // if no results, display Not found message
             console.log(err);
 
         }

@@ -1,18 +1,46 @@
-import { Fragment, useEffect } from "react"
-import { connect } from "react-redux"
+import { Fragment, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
 
-const Buy = () => {
+const Buy = ({ houses, geolocation, searchLocation }) => {
+
+    const [renderedHouses, setRenderedHouses] = useState([]);
+    
+    useEffect(() => {
+
+        if (searchLocation) {
+
+            updateRenderedHouses();
+
+        } else {
+
+            setRenderedHouses([houses]);
+            
+        }
+
+    }, []);
+    
+
+    const updateRenderedHouses = async() => {
+        const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
+        setRenderedHouses(response);
+    }
+    
+
     return (
-        <Fragment><HousingList/></Fragment>
+        <Fragment>
+            <HousingList houses={renderedHouses}/>
+        </Fragment>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        location: state.userGeolocation
+        geolocation: state.userGeolocation,
+        searchLocation: state.searchLocation,
+        houses: state.houses
     }
 }
 
