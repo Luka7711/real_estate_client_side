@@ -30,7 +30,7 @@ function Description({ house_obj, houseId }) {
 }
 
 export default function House({ house_obj, houseId }) {
-    console.log(house_obj, "HOUSE OBJECT")
+    
     if (house_obj.description === undefined || house_obj.location === undefined) {
     
         return null

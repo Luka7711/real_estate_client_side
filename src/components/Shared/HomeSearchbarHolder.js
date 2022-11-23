@@ -1,7 +1,7 @@
 import { getCityAndState } from "../../utils/searchEngine";
 import { updateSearchLocation } from '../../actions/index';
 import { connect } from "react-redux";
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import ImgMain from '../../images/realestate.jpg';
 
@@ -24,13 +24,19 @@ const searchWrapper = {
 
 function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
     
+    const navigate = useNavigate();
+    
     async function validateParamsAndGetHouses(event, address) {
+
         event.preventDefault();
 
         try {
 
+
             const response = await getCityAndState(address); 
             updateSearchLocation(response);
+
+            navigate('/housing-list');
 
         } catch(err) {
             // if no results, display Not found message
