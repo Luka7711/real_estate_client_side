@@ -1,5 +1,6 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
+import { faLocationPin } from '@fortawesome/free-solid-svg-icons';
 
 
 // get state and city data
@@ -49,37 +50,41 @@ export const getUserGeolocation = async () => {
 
 
 export function integerToThousands(number) {
-    return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    if (number) return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return " N/A"
 }
 
 
 
 
 
-export function getSpaceDetails({description}) {
-    let house_space_information = ""
-    
-    house_space_information += `${description.beds ?? 0} bds `
-    house_space_information += `| ${description.baths_full ?? 0} ba `
-    
-    let sqrFeet = description.sqft ? 
-        `| ${integerToThousands(description.sqft)} sqft`
-        :
-        ""; 
-    
-    house_space_information += sqrFeet
-    
-    return house_space_information
+export function getSpaceDetails({ description }) {
+
+    let beds = "beds" in description && description.beds !== null ? description.beds : 0;
+    let baths = "baths_full" in description ? description.baths_full : 0;
+    let space = "sqft" in description && description['sqft'] !== null ? ` | ${integerToThousands(description.sqft)} sqft` : "";
+    let houseDetails = "".concat(beds, " beds | ", baths, " ba ", space)
+
+    return houseDetails;
+
 }
 
 export function getAddress({location}) {
+
     const keys = ['line', 'city', 'state_code', 'postal_code'];
     let address = "";
 
     for (let key of keys) {
-        address += location['address'][key] + ", "
+
+        if (key in location['address']) {
+
+            address += location['address'][key] + ", "
+
+        }
     }
+
     return address.slice(0, -2)
+
 }
 
 
