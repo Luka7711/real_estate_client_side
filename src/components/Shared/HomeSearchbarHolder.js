@@ -34,7 +34,7 @@ function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
 
 
             const response = await getCityAndState(address); 
-            
+            console.log(response, "search bar result")
             if (response !== null) {
 
                 updateSearchLocation(response);
