@@ -61,7 +61,7 @@ export function integerToThousands(number) {
 export function getSpaceDetails({ description }) {
 
     let beds = "beds" in description && description.beds !== null ? description.beds : 0;
-    let baths = "baths_full" in description ? description.baths_full : 0;
+    let baths = "baths_full" in description && description['baths_full'] !== null ? description.baths_full : 0;
     let space = "sqft" in description && description['sqft'] !== null ? ` | ${integerToThousands(description.sqft)} sqft` : "";
     let houseDetails = "".concat(beds, " beds | ", baths, " ba ", space)
 

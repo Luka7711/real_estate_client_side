@@ -5,7 +5,7 @@ import House from '../Shared/House';
 
 
 export default function HousingList({ houses }) {
-    console.log(houses.length, "houses length from HOUSING LIST component")
+
     return houses.map(houseItem => {
         return (
                 <React.Fragment key={uuid()}>
