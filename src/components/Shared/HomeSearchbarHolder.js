@@ -34,9 +34,14 @@ function HomeSearchbarHolder({ searchLocation, updateSearchLocation }) {
 
 
             const response = await getCityAndState(address); 
-            updateSearchLocation(response);
+            
+            if (response !== null) {
 
-            navigate('/housing-list');
+                updateSearchLocation(response);
+                navigate('/housing-list');
+
+            }
+            else console.log("Display not found message");
 
         } catch(err) {
             // if no results, display Not found message
