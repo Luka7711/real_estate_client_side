@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import styles from './House.module.css'
 import { integerToThousands, getSpaceDetails, getAddress } from '../../utils';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import styles from './House.module.css'
 
 
 
@@ -12,7 +13,7 @@ function ImgDisplay({ photo }) {
     
     return (
         <div className={styles.img_container}>
-            <img className={styles.img_style} src={img_src}/>
+            <LazyLoadImage className={styles.img_style} src={img_src}/>
         </div>
     )
 }
@@ -30,7 +31,7 @@ function Description({ house_obj, houseId }) {
 }
 
 export default function House({ house_obj, houseId }) {
-    
+
     if (house_obj.description === undefined || house_obj.location === undefined) {
     
         return null
