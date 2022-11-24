@@ -1,15 +1,27 @@
 import { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { cleanupSearchLocation } from "../../actions";
+import PageSwitcher from "../Shared/PageSwitcher";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
+
+const mainContainer = {
+    width: "620px",
+    display: 'flex',
+    flexDirection: "column",
+    gap: "20px",
+    padding: "10px"
+}
 const housingListContainer = {
     display: "flex",
-    width: "610px",
+    width: "100%",
     flexWrap: "wrap",
     gap: "10px",
-    padding: "10px"
+}
+
+const buttonContainer = {
+    width: "80%"
 }
 
 const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
@@ -43,9 +55,17 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
     
 
     return (
-        <div style={housingListContainer} className="housingListContainer">
-            <HousingList houses={renderedHouses}/>
+        <div style={mainContainer}>
+
+            <div style={housingListContainer}>
+                <HousingList houses={renderedHouses}/>
+            </div>
+
+            <div style={buttonContainer}>
+                <PageSwitcher/>
+            </div>
         </div>
+
     )
 }
 
