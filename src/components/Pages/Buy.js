@@ -4,6 +4,13 @@ import { cleanupSearchLocation } from "../../actions";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
+const housingListContainer = {
+    display: "flex",
+    width: "610px",
+    flexWrap: "wrap",
+    gap: "10px",
+    padding: "10px"
+}
 
 const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
@@ -36,9 +43,9 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
     
 
     return (
-        <Fragment>
+        <div style={housingListContainer} className="housingListContainer">
             <HousingList houses={renderedHouses}/>
-        </Fragment>
+        </div>
     )
 }
 
