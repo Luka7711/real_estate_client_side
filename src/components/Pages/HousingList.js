@@ -5,7 +5,6 @@ import House from '../Shared/House';
 
 
 export default function HousingList({ houses }) {
-
     return houses.map(houseItem => {
         return (
                 <React.Fragment key={uuid()}>

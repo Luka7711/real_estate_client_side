@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { connect } from "react-redux";
 import { cleanupSearchLocation } from "../../actions";
-import PageSwitcher from "../Shared/PageSwitcher";
+import Pagination from "../Shared/Pagination";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
@@ -24,9 +24,21 @@ const buttonContainer = {
     width: "80%"
 }
 
+let PageSize = 10;
+
 const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     const [renderedHouses, setRenderedHouses] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const currentTableData = useMemo(() => {
+        
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+
+        return renderedHouses.slice(firstPageIndex, lastPageIndex);
+
+    }, [currentPage, renderedHouses]);
     
     useEffect(() => {
 
@@ -45,8 +57,8 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
         }
 
     }, []);
-    
 
+    
 
     const updateRenderedHouses = async() => {
         const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
@@ -58,11 +70,11 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
         <div style={mainContainer}>
 
             <div style={housingListContainer}>
-                <HousingList houses={renderedHouses}/>
+                <HousingList houses={currentTableData}/>
             </div>
 
             <div style={buttonContainer}>
-                <PageSwitcher/>
+                <Pagination/>
             </div>
         </div>
 
