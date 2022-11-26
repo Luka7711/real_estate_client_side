@@ -1,20 +1,45 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { connect } from "react-redux";
 import { cleanupSearchLocation } from "../../actions";
+import Pagination from "../Shared/Pagination";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 
-const housingListContainer = {
-    display: "flex",
-    width: "610px",
-    flexWrap: "wrap",
-    gap: "10px",
+
+const mainContainer = {
+    width: "620px",
+    display: 'flex',
+    flexDirection: "column",
+    gap: "20px",
     padding: "10px"
 }
+const housingListContainer = {
+    display: "flex",
+    width: "100%",
+    flexWrap: "wrap",
+    gap: "10px",
+}
+
+const buttonContainer = {
+    width: "80%",
+    margin: '0 auto'
+}
+
+let PageSize = 10;
 
 const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     const [renderedHouses, setRenderedHouses] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const currentTableData = useMemo(() => {
+        
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+
+        return renderedHouses.slice(firstPageIndex, lastPageIndex);
+
+    }, [currentPage, renderedHouses]);
     
     useEffect(() => {
 
@@ -33,8 +58,8 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
         }
 
     }, []);
-    
 
+    
 
     const updateRenderedHouses = async() => {
         const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
@@ -43,9 +68,23 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
     
 
     return (
-        <div style={housingListContainer} className="housingListContainer">
-            <HousingList houses={renderedHouses}/>
+        <div style={mainContainer}>
+
+            <div style={housingListContainer}>
+                <HousingList houses={currentTableData}/>
+            </div>
+
+            <div style={buttonContainer}>
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={renderedHouses.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
+            </div>
         </div>
+
     )
 }
 
