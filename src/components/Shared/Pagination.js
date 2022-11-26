@@ -1,5 +1,12 @@
+import { usePagination, DOTS } from "../../hooks/usePagination"
 
-
-export default function Pagination() {
-    return <div>1, 2, 3, 4</div>
+const Pagination = props => {
+    const {
+        onPageChange,
+        totalCount,
+        siblingCount = 1,
+        currentPage,
+        pageSize,
+        className
+    } = props;
 }
