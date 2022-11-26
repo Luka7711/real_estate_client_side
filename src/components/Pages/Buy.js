@@ -21,7 +21,8 @@ const housingListContainer = {
 }
 
 const buttonContainer = {
-    width: "80%"
+    width: "80%",
+    margin: '0 auto'
 }
 
 let PageSize = 10;
@@ -74,7 +75,13 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
             </div>
 
             <div style={buttonContainer}>
-                <Pagination/>
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={renderedHouses.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
             </div>
         </div>
 
