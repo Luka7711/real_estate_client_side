@@ -1,46 +1,46 @@
 import { marker_size } from './Hover_style';
 import { Fragment, useEffect } from 'react';
+import { connect } from 'react-redux';
 import GoogleMap from 'google-map-react';
 import MarkerHover from './MarkerHover';
 import React from 'react';
+import { checkKeyExist } from '../../../utils';
 
-export default function Map({houses}) {
+function Map({ houses,mapCenter }) {
   
   const defaultProps = {
-    center: [59.838043, 30.337157],
-    zoom: 9,
-    houses: [
-      {id: 'A', lat: 59.955413, lng: 30.337844},
-      {id: 'B', lat: 59.724, lng: 30.080}
-    ],
+    zoom: 11,
     hoverKey: false
   };
 
   const places = houses
     .map(house => {
 
-      if ('location' in house && 'address' in house['location']) {
-        
-        const { property_id } = house;
-        const coordinate  = house['location']['address']['coordinate']
+      const isAddressExist = checkKeyExist(house, 'address');
 
-        return (
-          <MarkerHover
-            key={property_id}
-            lat={coordinate.lat}
-            lng={coordinate.lon}
-            text={"h"}
-            hover={defaultProps.hoverKey === property_id} />
-        )
+      if (isAddressExist) {
+
+        const isCoordinateExist = house['location']['address']['coordinate']
+
+        if (isCoordinateExist !== null) {
+
+          const { property_id } = house;
+          const coordinate = house['location']['address']['coordinate']
+  
+          return (
+            <MarkerHover
+              key={property_id}
+              lat={coordinate.lat}
+              lng={coordinate.lon}
+              text={"h"}
+              hover={defaultProps.hoverKey === property_id} />
+          )
+
+        }
       }
-
     })
   
-  useEffect(() => {
-    console.log(houses)
-  })
-
-  
+  useEffect(() => console.log(mapCenter))
   const _onBoundChange = (center, zoom) => {
     console.log(center);
     console.log(zoom);
@@ -62,7 +62,7 @@ export default function Map({houses}) {
   return (
       <Fragment>
         <GoogleMap
-          center={defaultProps.center}
+          center={mapCenter}
           zoom={defaultProps.zoom}
           hoverDistance={marker_size / 2}
           onBoundChange={_onBoundChange}
@@ -77,3 +77,23 @@ export default function Map({houses}) {
   )
 }
 
+const mapStateToProps = state => {
+  
+  let center;
+  
+  if (state.searchLocation) {
+
+    center = state.searchLocation
+
+  } else if (!state.searchLocation && state.userGeolocation) {
+
+    center = state.userGeolocation
+
+  }
+
+  return {
+    mapCenter: [center.lat, center.lng]
+  }
+}
+
+export default connect(mapStateToProps)(Map);
