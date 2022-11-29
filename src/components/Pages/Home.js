@@ -5,6 +5,7 @@ import { fetchHouses } from "../../actions";
 import Carousel from "../Shared/Carousel";
 import HousingList from "./HousingList";
 import HomeSearchbarHolder from "../Shared/HomeSearchbarHolder";
+import Map from "../Shared/Map/Map";
 
 
 
