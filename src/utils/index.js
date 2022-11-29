@@ -11,7 +11,7 @@ export const getUserGeolocation = async () => {
         });
     
         return {
-            long: pos.coords.longitude,
+            lng: pos.coords.longitude,
             lat: pos.coords.latitude,
         };
     };
@@ -22,7 +22,7 @@ export const getUserGeolocation = async () => {
         if (coords) {
             
             const response = await getStateCity({...coords});
-            const locationDetails = { city: null, state: null };
+            const locationDetails = { city: null, state: null, ...coords };
     
             response['results'][0]['address_components'].forEach(component => {
                 let city = component['types'].indexOf("locality")
@@ -34,7 +34,7 @@ export const getUserGeolocation = async () => {
                     locationDetails['state'] = component['short_name']
                 }
             });
-            return locationDetails;
+            return locationDetails; 
         } 
         
     } catch (error) {

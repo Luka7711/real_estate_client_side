@@ -1,10 +1,10 @@
 import { marker_size } from './Hover_style';
+import { Fragment, useEffect } from 'react';
 import GoogleMap from 'google-map-react';
 import MarkerHover from './MarkerHover';
 import React from 'react';
-import { Fragment } from 'react';
 
-export default function Map() {
+export default function Map({houses}) {
   
   const defaultProps = {
     center: [59.838043, 30.337157],
@@ -16,19 +16,31 @@ export default function Map() {
     hoverKey: false
   };
 
-  const places = defaultProps.houses
+  const places = houses
     .map(house => {
-      const { id, ...coords } = house;
 
-      return (
-        <MarkerHover
-          key={id}
-          {...coords}
-          text={id}
-          hover={defaultProps.hoverKey === id} />
-      )
+      if ('location' in house && 'address' in house['location']) {
+        
+        const { property_id } = house;
+        const coordinate  = house['location']['address']['coordinate']
+
+        return (
+          <MarkerHover
+            key={property_id}
+            lat={coordinate.lat}
+            lng={coordinate.lon}
+            text={"h"}
+            hover={defaultProps.hoverKey === property_id} />
+        )
+      }
+
     })
+  
+  useEffect(() => {
+    console.log(houses)
+  })
 
+  
   const _onBoundChange = (center, zoom) => {
     console.log(center);
     console.log(zoom);

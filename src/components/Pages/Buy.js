@@ -14,7 +14,7 @@ const searchPageListContainer = {
     gap: "20px",
     padding: "0 10px",
     boxShadow: "3px 3px 3px 3px grey",
-    zIndex: '1000'
+    zIndex: '100'
 }
 const housingListContainer = {
     display: "flex",
@@ -83,7 +83,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     return (
         <div style={searchPageContainer}>
-            <div style={searchPageMapContainer}><Map/></div>
+            <div style={searchPageMapContainer}><Map houses={renderedHouses}/></div>
             <div style={searchPageListContainer}>
                 <div style={housingListContainer}>
                     <HousingList houses={currentTableData}/>
