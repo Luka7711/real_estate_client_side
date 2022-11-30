@@ -12,10 +12,6 @@ function Map({ houses, mapCenter }) {
   const [zoom, setZoom] = useState(defaultZoom);
   const [hoverKey, setHoverKey] = useState("");
 
-  useEffect(() => {
-    console.log(hoverKey, "HOVERED")
-  })
-
   const places = houses
     .map(house => {
 
