@@ -9,7 +9,6 @@ export default function MarkerHover({ hover, text }) {
         <div className='hint' style={style}>
             <div> {text} </div>
             <div style={{width: 80}} className="hint__content">
-                Click me
             </div>
         </div>
     )

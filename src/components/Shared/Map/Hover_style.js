@@ -1,4 +1,4 @@
-const marker_size = 40;
+const marker_size = 8;
 
 const markerStyle = {
     position: 'absolute',
@@ -8,7 +8,7 @@ const markerStyle = {
     top: -marker_size / 2,
 
     border: '5px solid #f44336',
-    borderRadius: marker_size,
+    borderRadius: "50%",
     background: '#fff',
     textAlign: 'center',
     color: '#3f51b5',

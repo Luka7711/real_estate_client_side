@@ -41,7 +41,9 @@ function Map({ houses,mapCenter }) {
     })
   
   useEffect(() => console.log(mapCenter))
+
   const _onBoundChange = (center, zoom) => {
+    console.log("zoom event")
     console.log(center);
     console.log(zoom);
   }
@@ -59,17 +61,24 @@ function Map({ houses,mapCenter }) {
     console.log('MOUSE LEAVE EVENT')
   }
 
+  const createMapOptions = () => {
+    return {
+      gestureHandling: 'greedy'
+    }
+  }
+
   return (
       <Fragment>
         <GoogleMap
           center={mapCenter}
           zoom={defaultProps.zoom}
           hoverDistance={marker_size / 2}
-          onBoundChange={_onBoundChange}
+          onChange={_onBoundChange}
           onChildClick={_onChildClick}
           onChildMouseEnter={_onChildMouseEnter}
           onChildMouseLeave={_onChildMouseLeave}
           bootstrapURLKeys={{key: process.env.REACT_APP_GOOGLE_MAP_KEY}}
+          options={createMapOptions}
           >
           { places }
         </GoogleMap>
