@@ -1,13 +1,15 @@
 import { markerStyle, markerStyleHover } from './Hover_style';
 
 
-export default function MarkerHover({ hover, text }) {
+export default function MarkerHover({ hover, zoom, house, defaultZoom }) {
 
-    const style= hover ? markerStyle : markerStyleHover;
+    const style= hover ? markerStyleHover : markerStyle;
+    
+    const housePrice = zoom > defaultZoom ? <div> { house.list_price } </div> : null;
 
     return (
         <div className='hint' style={style}>
-            <div> {text} </div>
+            {housePrice}
             <div style={{width: 80}} className="hint__content">
             </div>
         </div>

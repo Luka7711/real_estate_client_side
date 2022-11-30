@@ -1,17 +1,18 @@
 import { marker_size } from './Hover_style';
 import { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { checkKeyExist } from '../../../utils';
 import GoogleMap from 'google-map-react';
 import MarkerHover from './MarkerHover';
-import React from 'react';
-import { checkKeyExist } from '../../../utils';
+import React, { useState } from 'react';
 
 function Map({ houses,mapCenter }) {
-  
-  const defaultProps = {
-    zoom: 11,
-    hoverKey: false
-  };
+
+  const defaultZoom = 11;
+  const [zoom, setZoom] = useState(defaultZoom);
+  const [hoverKey, setHoverKey] = useState("");
+
+
 
   const places = houses
     .map(house => {
@@ -32,20 +33,21 @@ function Map({ houses,mapCenter }) {
               key={property_id}
               lat={coordinate.lat}
               lng={coordinate.lon}
-              text={"h"}
-              hover={defaultProps.hoverKey === property_id} />
+              hover={hoverKey === property_id} 
+              house={house}
+              zoom={zoom}
+              defaultZoom={defaultZoom}
+              />
           )
 
         }
       }
     })
   
-  useEffect(() => console.log(mapCenter))
 
-  const _onBoundChange = (center, zoom) => {
-    console.log("zoom event")
-    console.log(center);
-    console.log(zoom);
+  const _onZoom = (center) => {
+    console.log(zoom)
+    setZoom(center.zoom);
   }
 
   const _onChildClick = (key, childProps) => {
@@ -54,11 +56,11 @@ function Map({ houses,mapCenter }) {
   }
 
   const _onChildMouseEnter = (key) => {
-    console.log(key, "key");
+    setHoverKey(key);
   }
 
   const _onChildMouseLeave = () => {
-    console.log('MOUSE LEAVE EVENT')
+    setHoverKey("")
   }
 
   const createMapOptions = () => {
@@ -71,9 +73,9 @@ function Map({ houses,mapCenter }) {
       <Fragment>
         <GoogleMap
           center={mapCenter}
-          zoom={defaultProps.zoom}
+          zoom={zoom}
           hoverDistance={marker_size / 2}
-          onChange={_onBoundChange}
+          onChange={_onZoom}
           onChildClick={_onChildClick}
           onChildMouseEnter={_onChildMouseEnter}
           onChildMouseLeave={_onChildMouseLeave}
