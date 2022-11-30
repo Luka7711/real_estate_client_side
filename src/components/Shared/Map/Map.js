@@ -1,18 +1,20 @@
 import { marker_size } from './Hover_style';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { checkKeyExist } from '../../../utils';
 import GoogleMap from 'google-map-react';
 import MarkerHover from './MarkerHover';
 import React, { useState } from 'react';
 
-function Map({ houses,mapCenter }) {
+function Map({ houses, mapCenter }) {
 
   const defaultZoom = 11;
   const [zoom, setZoom] = useState(defaultZoom);
   const [hoverKey, setHoverKey] = useState("");
 
-
+  useEffect(() => {
+    console.log(hoverKey, "HOVERED")
+  })
 
   const places = houses
     .map(house => {
@@ -29,7 +31,7 @@ function Map({ houses,mapCenter }) {
           const coordinate = house['location']['address']['coordinate']
   
           return (
-            <MarkerHover
+            <MarkerHoverMemo
               key={property_id}
               lat={coordinate.lat}
               lng={coordinate.lon}
@@ -46,12 +48,10 @@ function Map({ houses,mapCenter }) {
   
 
   const _onZoom = (center) => {
-    console.log(zoom)
     setZoom(center.zoom);
   }
 
   const _onChildClick = (key, childProps) => {
-    console.log(key, "key");
     console.log(childProps, "childProps");
   }
 
@@ -106,5 +106,7 @@ const mapStateToProps = state => {
     mapCenter: [center.lat, center.lng]
   }
 }
+
+const MarkerHoverMemo = React.memo(MarkerHover)
 
 export default connect(mapStateToProps)(Map);
