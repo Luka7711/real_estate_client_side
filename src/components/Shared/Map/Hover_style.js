@@ -11,9 +11,8 @@ const markerStyle = {
     borderRadius: "50%",
     background: '#fff',
     textAlign: 'center',
-    color: '#3f51b5',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 11,
     padding: 4,
     cursor: 'pointer'
 };
