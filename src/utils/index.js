@@ -71,6 +71,9 @@ export class HouseSpaceDetails {
 
     static getSqFeet({description}) {
         let sqft = "sqft" in description && description['sqft'] !== null ? integerToThousands(description.sqft) : null;
+        
+        if (sqft) sqft += " sqft"
+
         return sqft;
     }
 
@@ -82,10 +85,7 @@ export class HouseSpaceDetails {
         
         let spaces = [beds, baths];
 
-        if (sqft) {
-            sqft += " sqft"
-            spaces = [...spaces, sqft]
-        }
+        if (sqft) spaces = [...spaces, sqft]
 
         return spaces.join(" | ") 
     }
