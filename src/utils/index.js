@@ -57,17 +57,41 @@ export function integerToThousands(number) {
 
 
 
+export class HouseSpaceDetails {
 
-export function getSpaceDetails({ description }) {
+    static getBeds({ description }) {
+        let beds = "beds" in description && description.beds !== null ? description.beds : 0
+        return beds;
+    }
 
-    let beds = "beds" in description && description.beds !== null ? description.beds : 0;
-    let baths = "baths_full" in description && description['baths_full'] !== null ? description.baths_full : 0;
-    let space = "sqft" in description && description['sqft'] !== null ? ` | ${integerToThousands(description.sqft)} sqft` : "";
-    let houseDetails = "".concat(beds, " beds | ", baths, " ba ", space)
+    static getBath({description}) {
+        let baths = "baths_full" in description && description['baths_full'] !== null ? description.baths_full : 0
+        return baths;
+    }
 
-    return houseDetails;
+    static getSqFeet({description}) {
+        let sqft = "sqft" in description && description['sqft'] !== null ? integerToThousands(description.sqft) : null;
+        return sqft;
+    }
+
+    static formatSpaced(house) {
+        
+        const beds = this.getBeds(house) + " beds";
+        const baths = this.getBath(house) + " ba";
+        let sqft = this.getSqFeet(house);
+        
+        let spaces = [beds, baths];
+
+        if (sqft) {
+            sqft += " sqft"
+            spaces = [...spaces, sqft]
+        }
+
+        return spaces.join(" | ") 
+    }
 
 }
+
 
 export function getAddress({location}) {
 
