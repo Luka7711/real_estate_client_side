@@ -1,5 +1,7 @@
 import { defaultUserLocation } from '../data';
 import { getStateCity } from '../apis/googleMap';
+import { faLocationPin } from '@fortawesome/free-solid-svg-icons';
+
 
 // get state and city data
 export const getUserGeolocation = async () => {
@@ -9,7 +11,7 @@ export const getUserGeolocation = async () => {
         });
     
         return {
-            long: pos.coords.longitude,
+            lng: pos.coords.longitude,
             lat: pos.coords.latitude,
         };
     };
@@ -20,7 +22,7 @@ export const getUserGeolocation = async () => {
         if (coords) {
             
             const response = await getStateCity({...coords});
-            const locationDetails = { city: null, state: null };
+            const locationDetails = { city: null, state: null, ...coords };
     
             response['results'][0]['address_components'].forEach(component => {
                 let city = component['types'].indexOf("locality")
@@ -32,7 +34,7 @@ export const getUserGeolocation = async () => {
                     locationDetails['state'] = component['short_name']
                 }
             });
-            return locationDetails;
+            return locationDetails; 
         } 
         
     } catch (error) {
@@ -43,32 +45,130 @@ export const getUserGeolocation = async () => {
     }
 } 
 
+
+
+
+
 export function integerToThousands(number) {
-    return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    if (number) return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    return " N/A"
 }
 
-export function getSpaceDetails({description}) {
-    let house_space_information = ""
-    
-    house_space_information += `${description.beds ?? 0} bds `
-    house_space_information += `| ${description.baths_full ?? 0} ba `
-    
-    let sqrFeet = description.sqft ? 
-        `| ${integerToThousands(description.sqft)} sqft`
-        :
-        ""; 
-    
-    house_space_information += sqrFeet
-    
-    return house_space_information
+
+
+
+export class HouseSpaceDetails {
+
+    static getBeds({ description }) {
+        let beds = "beds" in description && description.beds !== null ? description.beds : 0
+        return beds;
+    }
+
+    static getBath({description}) {
+        let baths = "baths_full" in description && description['baths_full'] !== null ? description.baths_full : 0
+        return baths;
+    }
+
+    static getSqFeet({description}) {
+        let sqft = "sqft" in description && description['sqft'] !== null ? integerToThousands(description.sqft) : null;
+        
+        if (sqft) sqft += " sqft"
+
+        return sqft;
+    }
+
+    static formatSpaced(house) {
+        
+        const beds = this.getBeds(house) + " beds";
+        const baths = this.getBath(house) + " ba";
+        let sqft = this.getSqFeet(house);
+        
+        let spaces = [beds, baths];
+
+        if (sqft) spaces = [...spaces, sqft]
+
+        return spaces.join(" | ") 
+    }
+
 }
+
 
 export function getAddress({location}) {
+
     const keys = ['line', 'city', 'state_code', 'postal_code'];
     let address = "";
 
     for (let key of keys) {
-        address += location['address'][key] + ", "
+
+        if (key in location['address']) {
+
+            address += location['address'][key] + ", "
+
+        }
     }
+
     return address.slice(0, -2)
+
 }
+
+
+
+
+
+
+
+export const checkKeyExist = (ob, key) => {
+    const path = [];
+    const keyExists = (obj) => {
+      if (!obj || (typeof obj !== "object" && !Array.isArray(obj))) {
+        return false;
+      }
+      else if (obj.hasOwnProperty(key)) {
+        return true;
+      }
+      else if (Array.isArray(obj)) {
+        let parentKey = path.length ? path.pop() : "";
+  
+        for (let i = 0; i < obj.length; i++) {
+          path.push(`${parentKey}[${i}]`);
+          const result = keyExists(obj[i], key);
+          if (result) {
+            return result;
+          }
+          path.pop();
+        }
+      }
+      else {
+        for (const k in obj) {
+          path.push(k);
+          const result = keyExists(obj[k], key);
+          if (result) {
+            return result;
+          }
+          path.pop();
+        }
+      }
+      return false;
+    };
+  
+    keyExists(ob);
+  
+    return path.length > 0
+  }
+  
+  export function nFormatter(num, digits) {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "K" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" }
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup.slice().reverse().find(function(item) {
+      return num >= item.value;
+    });
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+  }
