@@ -1,6 +1,7 @@
 import { current } from "@reduxjs/toolkit";
 import classnames from "classnames";
 import { usePagination, DOTS } from "../../hooks/usePagination"
+import uuid from "react-uuid";
 import './Pagination.scss'
 
 const Pagination = props => {
@@ -40,6 +41,7 @@ const Pagination = props => {
 
         return (
             <li 
+                key={uuid()}
                 className={ classnames('pagination-item dots', {
                     selected: pageNumber === currentPage
                 })} 
@@ -52,6 +54,7 @@ const Pagination = props => {
     return (
         <ul className={classnames("pagination-container", { [className]: className})}>
             <li 
+                key={uuid()}
                 className={classnames('pagination-item', { disabled: currentPage === 1 }) }  
                 onClick={onPrevious}
             >
@@ -64,7 +67,9 @@ const Pagination = props => {
                 className={classnames('pagination-item', {
                     disabled: currentPage === lastPage
                 })}
-                onClick={onNext}>
+                onClick={onNext}
+                key={uuid()}
+                >
                 <div className="arrow right"/>
             </li>
         </ul>
