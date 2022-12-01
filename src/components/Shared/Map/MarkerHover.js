@@ -1,7 +1,47 @@
-import { markerStyle, markerStyleHover } from './Hover_style';
+import { markerStyle } from './Hover_style';
 import { nFormatter } from '../../../utils';
-import { useEffect } from 'react';
-import { marker_size } from './Hover_style';
+
+
+const  HintBox = ({ house, boxStyle }) => {
+
+    const defaultImage = house.primary_photo && house['primary_photo'].hasOwnProperty("href") ?
+        house['primary_photo']['href']
+        :
+        "https://www.femtoscientific.com/wp-content/uploads/2014/12/default_image_01.png"
+
+
+    const wrapperContent = {
+        width: '100px',
+        height: '50px',
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '5px',
+        alignItems: 'center'
+    }
+
+    const imgContainer = {
+        width: "30%",
+        height: 'inherit',
+        backgroundImage: `url(${defaultImage})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+    }
+
+
+    return (
+        <div style={boxStyle}>
+            <div style={wrapperContent}>
+                <div style={imgContainer}></div>
+                <ul>
+                    <li>{nFormatter(house.list_price)}</li>
+                    <li>3bd, 2ba</li>
+                    <li>1,190 sqft</li>
+                </ul>
+            </div>
+        </div>
+    )
+}
 
 
 export default function MarkerHover({ hover, zoom, house, defaultZoom }) {
@@ -11,6 +51,7 @@ export default function MarkerHover({ hover, zoom, house, defaultZoom }) {
         top: -12,
         left: -14,
         color: 'white',
+        cursor: 'pointer'
     }
     
     const priceContainer = {
@@ -26,20 +67,19 @@ export default function MarkerHover({ hover, zoom, house, defaultZoom }) {
 
     let hintBoxStyle = {
         position: 'absolute',
-        width: '100px',
-        height: '50px',
         top: "-10px",
         left: zoom > defaultZoom ? '36px' : "13px", 
         background: 'white',
         color: 'black',
         zIndex: '100',
         borderRadius: '2px',
-        padding: '3px'
+        padding: '4px'
     }
 
 
 
-    const hintBox = hover ? <div style={hintBoxStyle}>BOX CONTAINER</div> : null;    
+    const hintBox = hover ? <HintBox boxStyle={hintBoxStyle} house={house}/> : null;    
+
     const housePrice = zoom > defaultZoom ? <div style={priceContainer}> { nFormatter(house.list_price) } </div> : null;
     const currentMarkerStyle = zoom > defaultZoom ? expandedMarkerWrapper : markerStyle;
 
