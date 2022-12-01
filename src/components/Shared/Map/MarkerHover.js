@@ -1,5 +1,5 @@
 import { markerStyle } from './Hover_style';
-import { nFormatter } from '../../../utils';
+import { nFormatter, HouseSpaceDetails } from '../../../utils';
 
 
 const  HintBox = ({ house, boxStyle }) => {
@@ -28,15 +28,18 @@ const  HintBox = ({ house, boxStyle }) => {
         backgroundPosition: 'center'
     }
 
+    const bedsAndBaths = `${HouseSpaceDetails.getBeds(house)} bd, ${HouseSpaceDetails.getBath(house)} ba`;
+    const sqft = HouseSpaceDetails.getSqFeet(house)
+    
 
     return (
         <div style={boxStyle}>
             <div style={wrapperContent}>
                 <div style={imgContainer}></div>
                 <ul>
-                    <li>{nFormatter(house.list_price)}</li>
-                    <li>3bd, 2ba</li>
-                    <li>1,190 sqft</li>
+                    <li style={{fontWeight: "bold"}}>{nFormatter(house.list_price)}</li>
+                    <li>{ bedsAndBaths }</li>
+                    <li>{ sqft }</li>
                 </ul>
             </div>
         </div>

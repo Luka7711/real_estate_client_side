@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { integerToThousands, getSpaceDetails, getAddress } from '../../utils';
+import { integerToThousands, HouseSpaceDetails, getAddress } from '../../utils';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import styles from './House.module.css'
 
@@ -24,7 +24,7 @@ function Description({ house_obj, houseId }) {
     return (
         <ul className={styles.ul_style}>
             <li className={styles.price_primary}>${integerToThousands(house_obj.list_price)}</li>
-            <li className={styles.secondary_details}>{getSpaceDetails(house_obj)}</li>
+            <li className={styles.secondary_details}>{HouseSpaceDetails.formatSpaced(house_obj)}</li>
             <li className={styles.secondary_details}>{getAddress(house_obj)}</li>
         </ul>
     )

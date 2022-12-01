@@ -54,6 +54,7 @@ const Pagination = props => {
     return (
         <ul className={classnames("pagination-container", { [className]: className})}>
             <li 
+                key={uuid()}
                 className={classnames('pagination-item', { disabled: currentPage === 1 }) }  
                 onClick={onPrevious}
             >
@@ -66,7 +67,9 @@ const Pagination = props => {
                 className={classnames('pagination-item', {
                     disabled: currentPage === lastPage
                 })}
-                onClick={onNext}>
+                onClick={onNext}
+                key={uuid()}
+                >
                 <div className="arrow right"/>
             </li>
         </ul>
