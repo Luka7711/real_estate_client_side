@@ -14,7 +14,8 @@ The Ziplow is replication of popular real estate application Zillow. I was motiv
 and rebuild application from scratch with React and Node with additional features.
 My motto is "- Learn through practice, make mistakes, improve, keep going."
 <br/>
-The main takeaways from this project were to learn how to:
+<br/>
+**The main takeaways from this project were to learn how to:**
 
 - Caintain complex React states using Redux library
 - Build reusable React components
@@ -46,5 +47,3 @@ The main takeaways from this project were to learn how to:
      <br/>
      - `npm install`
      - `npm start`
-
-## How to use the project
