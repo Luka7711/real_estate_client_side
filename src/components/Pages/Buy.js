@@ -14,7 +14,8 @@ const searchPageListContainer = {
     gap: "20px",
     padding: "0 10px",
     boxShadow: "3px 3px 3px 3px grey",
-    zIndex: '100'
+    zIndex: '100',
+    overflowY: 'auto'
 }
 const housingListContainer = {
     display: "flex",
@@ -29,22 +30,31 @@ const buttonContainer = {
     margin: '0 auto'
 }
 
-const searchPageContainer = {
-    display: 'flex',
-    flexDirection: 'row'
-}
 
 const searchPageMapContainer = {
     width: "55%",
-    height: "700px"
+    height: "inherit"
 }
 
 let PageSize = 10;
 
-const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
+
+
+const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
+    
     const [renderedHouses, setRenderedHouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [height, setHeight] = useState(0);
+
+
+    const searchPageContainer = {
+        display: 'flex',
+        flexDirection: 'row',
+        height: `calc(100vh - ${height}px)`
+    }
+
+
 
     const currentTableData = useMemo(() => {
         
@@ -55,7 +65,16 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     }, [currentPage, renderedHouses]);
     
+
+
+
     useEffect(() => {
+
+        const navigationHeight = document.querySelector("nav").offsetHeight;
+        setHeight(navigationHeight);
+
+        const rootContainer = document.querySelector("body");
+        rootContainer.style.overflow = "hidden";
 
         if (searchLocation) {
 
@@ -69,11 +88,14 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
         return () => {
             cleanupSearchLocation();
+            rootContainer.style.overflow = "none";
         }
 
     }, []);
 
-    
+
+
+
 
     const updateRenderedHouses = async() => {
         const response = await fetchHouses(searchLocation.city, searchLocation.state_id);

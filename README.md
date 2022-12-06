@@ -6,12 +6,16 @@
 ![alt lastcommit](https://img.shields.io/github/last-commit/luka7711/real_estate_client_side)
 ![alt repo size](https://img.shields.io/github/repo-size/luka7711/real_estate_client_side)
 
+![projectImage](./public/project.png)
+
 ## Description
 
 The Ziplow is replication of popular real estate application Zillow. I was motivated to replicate
 and rebuild application from scratch with React and Node with additional features.
+My motto is "- Learn through practice, make mistakes, improve, keep going."
 <br/>
-The main takeaways from this project were to learn how to:
+<br/>
+**The main takeaways from this project were to learn how to:**
 
 - Caintain complex React states using Redux library
 - Build reusable React components
@@ -21,11 +25,21 @@ The main takeaways from this project were to learn how to:
 ## Table of contents
 
 - Instructions
+- How to use the project
 
 ## Instructions
 
 1. Fork this repository
 1. Clone your forked repository
+1. Add dotenv file
+1. Add environment variables and generate API keys:
+   <br/>
+   VARIABLES | SOURCE
+   ------------------------ | -------------
+   REACT_APP_GOOGLE_MAP_KEY | [Generate API Key](https://developers.google.com/maps/documentation/javascript/get-api-key)
+   REACT_APP_REALESTATE_KEY | [Real Estate API](https://rapidapi.com/datascraper/api/us-real-estate/)
+   REACT_APP_SERVER_URL | Server URL http://localhost:9000
+
 1. Install packages:
    <br/>
    - Navigate to root directory in terminal.
