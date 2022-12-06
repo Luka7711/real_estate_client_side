@@ -6,6 +6,8 @@
 ![alt lastcommit](https://img.shields.io/github/last-commit/luka7711/real_estate_client_side)
 ![alt repo size](https://img.shields.io/github/repo-size/luka7711/real_estate_client_side)
 
+![projectImage](./public/project.png)
+
 ## Description
 
 The Ziplow is replication of popular real estate application Zillow. I was motivated to replicate
@@ -28,7 +30,7 @@ The main takeaways from this project were to learn how to:
 
 1. Fork this repository
 1. Clone your forked repository
-1. Create .env file
+1. Add dotenv file
 1. Add environment variables and generate API keys:
    <br/>
    VARIABLES | SOURCE
