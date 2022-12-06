@@ -88,6 +88,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
         return () => {
             cleanupSearchLocation();
+            rootContainer.style.overflow = "none";
         }
 
     }, []);
