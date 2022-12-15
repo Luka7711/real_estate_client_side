@@ -10,7 +10,7 @@ const Navigation = () => {
                 <li className={styles.nav_li}><Link to={'/housing-list'}>Buy</Link></li>
             </ul>
             <ul>
-                <li className={styles.logo}><Link to={'/'}><span><FontAwesomeIcon icon={faBuilding}/></span>  Ziplow </Link></li>
+                <li className={styles.logo}><Link to={'/'}><span><FontAwesomeIcon icon={faBuilding}/></span>  Real Estate </Link></li>
             </ul>
       </nav>
     )
