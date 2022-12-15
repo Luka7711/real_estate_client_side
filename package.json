@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "google-map-react": "^2.2.0",
+    "netlify-cli": "^12.2.11",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
     "webpack": "^5.75.0"
