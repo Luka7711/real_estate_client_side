@@ -5,9 +5,8 @@ import { integerToThousands } from "../../../utils";
 
 
 function PriceRange({priceNumbers, formatter}) {
-    console.log(priceNumbers, "price numbers")
     const priceList = priceNumbers.map(price => {
-        return <li key={uuid()}>{formatter(price)}</li>
+        return <li key={uuid()}>{formatter(price, 2)}</li>
     });
 
     return (
