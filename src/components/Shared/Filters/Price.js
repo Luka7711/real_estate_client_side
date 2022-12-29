@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from "react"
 import uuid from "react-uuid";
+import './Price.scss';
+import Icon from "../Icons";
 import { nFormatter } from "../../../utils";
 import { integerToThousands } from "../../../utils";
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function PriceRange({
@@ -32,15 +36,28 @@ function PriceRange({
 
 
     return (
-        <>
-            <label>{priceType}</label>
-            <input key={uuid()} type="text" placeholder={price} value={price}/>
+        <div className="priceRangeWrapper">
+            <label>
+                {priceType}
+            </label>
+
+            <div className="inputWrapper">
+                <input 
+                    key={uuid()} 
+                    type="text" 
+                    placeholder={price} 
+                    value={price}
+                    disabled
+                />
+                <Icon icon={faArrowDown}/>
+            </div>
+
             <section>
                 <ul>
                     {priceList}
                 </ul>
             </section>
-        </>
+        </div>
     )
 }
 
@@ -70,7 +87,7 @@ function PriceForm() {
     return (
         <div>
             <h5>Price Range</h5>
-            <form>
+            <form className="priceForm">
                 <PriceRange 
                     priceNumbers={minPriceRange} 
                     formatter={integerToThousands} 
