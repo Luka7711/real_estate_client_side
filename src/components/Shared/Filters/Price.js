@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from "react"
-import uuid from "react-uuid";
-import './Price.scss';
-import Icon from "../Icons";
 import { nFormatter } from "../../../utils";
 import { integerToThousands } from "../../../utils";
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
+
+import React, {useState, useEffect} from "react"
+import FilterTitle from "./FilterTitle";
+import uuid from "react-uuid";
+import './Price.scss';
+import Icon from "../Icons";
 
 
 
@@ -15,18 +17,15 @@ function PriceRange({
      initialVal
     }) {
     
-    const [price, setPrice] = useState(initialVal);
+    const [price, setPrice] = useState("");
+    const [stringNum, setStringNum] = useState(initialVal);
 
     useEffect(() => {
-
-    }, [])
-
-
+        setStringNum(nFormatter(price, 2));
+    }, [price])
 
     const priceList = priceNumbers.map(price => {
-
-        const formattedPrice = formatter(price, 2)
-
+        const formattedPrice = "$" + formatter(price, 2)
         return (
             <li onClick={() => setPrice(price)} key={uuid()}>
                 { formattedPrice }
@@ -35,18 +34,28 @@ function PriceRange({
     });
 
 
+    const handleChange = () => {
+        console.log("Value is changed")
+    }
+
+    const activateInput = (e) => {
+        const inputElement = document.querySelector('.inputPrice');
+    }
+
     return (
         <div className="priceRangeWrapper">
-            <label>
-                {priceType}
-            </label>
+            <div className="labelPrice">
+                <label>{priceType}</label>
+            </div>
 
-            <div className="inputWrapper">
+            <div className="inputWrapper" onClick={activateInput}>
                 <input 
+                    className="inputPrice"
                     key={uuid()} 
                     type="text" 
-                    placeholder={price} 
-                    value={price}
+                    placeholder={stringNum} 
+                    value={stringNum}
+                    onChange={() => handleChange()}
                     disabled
                 />
                 <Icon icon={faArrowDown}/>
@@ -60,6 +69,7 @@ function PriceRange({
         </div>
     )
 }
+
 
 
 function PriceForm() {
@@ -85,8 +95,8 @@ function PriceForm() {
     }
 
     return (
-        <div>
-            <h5>Price Range</h5>
+        <div className="mainFormWrapper">
+            <FilterTitle title="Price Range"/>
             <form className="priceForm">
                 <PriceRange 
                     priceNumbers={minPriceRange} 

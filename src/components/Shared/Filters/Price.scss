@@ -2,27 +2,34 @@ section {
   display: none;
 }
 
-.active {
-  display: block;
-}
+// .active {
+//   display: block;
+// }
 
-.priceForm {
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-
-  .inputWrapper {
+.mainFormWrapper {
+  .priceForm {
     display: flex;
     flex-direction: row;
-    background-color: #eeee;
-    padding: 10px;
+    column-gap: 20px;
 
-    input {
-      border: none;
+    .inputWrapper {
+      display: flex;
+      flex-direction: row;
       background-color: #eeee;
+      padding: 10px;
+
+      input {
+        border: none;
+        background-color: #eeee;
+      }
+      svg {
+        background-color: #eeee;
+      }
     }
-    svg {
-      background-color: #eeee;
+    .priceRangeWrapper {
+      .labelPrice {
+        padding: 10px 0;
+      }
     }
   }
 }

@@ -105,8 +105,9 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
     
 
     return (
+        <>
+        <FilterList/>
         <div style={searchPageContainer}>
-            <FilterList/>
             <div style={searchPageMapContainer}><Map houses={renderedHouses}/></div>
             <div style={searchPageListContainer}>
                 <div style={housingListContainer}>
@@ -123,6 +124,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
