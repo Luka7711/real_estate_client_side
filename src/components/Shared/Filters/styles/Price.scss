@@ -1,0 +1,31 @@
+// .active {
+//   display: block;
+// }
+
+.mainFormWrapper {
+  .priceForm {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+
+    .inputWrapper {
+      display: flex;
+      flex-direction: row;
+      background-color: #eeee;
+      padding: 10px;
+
+      input {
+        border: none;
+        background-color: #eeee;
+      }
+      svg {
+        background-color: #eeee;
+      }
+    }
+    .priceRangeWrapper {
+      .labelPrice {
+        padding: 10px 0;
+      }
+    }
+  }
+}

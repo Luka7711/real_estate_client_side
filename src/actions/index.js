@@ -27,3 +27,7 @@ export const updateSearchLocation = (location) => dispatch => {
 export const cleanupSearchLocation = () => dispatch => {
     dispatch({ type: "CLEANUP_SEARCH"});
 }
+
+export const filterByPrice = (priceRange) => dispatch => {
+    dispatch({type: "FILTER_BY_PRICE", payload: priceRange});
+}

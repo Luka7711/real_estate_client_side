@@ -5,6 +5,7 @@ import Pagination from "../Shared/Pagination";
 import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 import Map from "../Shared/Map/Map";
+import FilterList from '../Shared/Filters/Main';
 
 
 const searchPageListContainer = {
@@ -104,6 +105,8 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
     
 
     return (
+        <>
+        <FilterList/>
         <div style={searchPageContainer}>
             <div style={searchPageMapContainer}><Map houses={renderedHouses}/></div>
             <div style={searchPageListContainer}>
@@ -121,6 +124,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
