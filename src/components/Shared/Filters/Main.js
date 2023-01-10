@@ -1,25 +1,73 @@
+import {useState} from 'react';
+import { useEffect } from 'react';
 import FilterBtn from "../../Buttons/FilterBtn";
 import uuid from "react-uuid";
 import './styles/Main.scss';
+import PriceForm from './PriceForm';
+
 
 
 export default function Main() {
-    
+
+    const [currentOption, setCurrentOption] = useState(null);
+
     const filterOptions = [
-        "For Sale",
-        "Price",
-        "Beds & Baths",
-        "Home Type",
-        "More"
+        {
+            name: "For Sale",
+            compon: null
+        },
+        {
+            name: "Price",
+            compon: <PriceForm/>
+        },
+        {
+            name: "Beds & Baths",
+            compon: null
+        },
+        {
+            name: "Home Type",
+            compon: null
+        }, 
+        {
+            name: "More",
+            compon: null
+        }
     ];
 
-    const filterBtns = filterOptions.map(option => {
-        return <FilterBtn name={option} key={uuid()}/>
+
+
+    function switchFilterOption(filterName) {
+        setCurrentOption(filterName);
+    }
+
+
+    const BTN_FILTERS = filterOptions.map(option => {
+
+        if (currentOption === option['name']) {
+
+            return (
+                <FilterBtn 
+                  name={option['name']} 
+                  key={uuid()} 
+                  switchFilterOption={switchFilterOption}
+                  filterForm={option['compon']}
+                />
+            )
+        } else {
+            return (
+                <FilterBtn 
+                  name={option['name']} 
+                  key={uuid()} 
+                  switchFilterOption={switchFilterOption}
+                  filterForm={null}
+              />
+            )
+        } 
     });
 
     return (
         <div className="filterWrapper">
-            { filterBtns }
+            { BTN_FILTERS }
         </div>
     )
 }
