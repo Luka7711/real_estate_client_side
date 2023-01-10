@@ -3,9 +3,9 @@ import { integerToThousands } from "../../../utils";
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 import React, {useState, useEffect} from "react"
-import FilterTitle from "./FilterTitle";
+import FilterTitle from "./FilterName";
 import uuid from "react-uuid";
-import './Price.scss';
+import './styles/Price.scss';
 import Icon from "../Icons";
 
 
@@ -34,9 +34,6 @@ function PriceRange({
     });
 
 
-    const handleChange = () => {
-        console.log("Value is changed")
-    }
 
     const activateInput = (e) => {
         const inputElement = document.querySelector('.inputPrice');

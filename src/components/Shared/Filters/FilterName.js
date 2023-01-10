@@ -1,4 +1,4 @@
-import './FilterTitle.scss';
+import './styles/FilterTitle.scss';
 
 export default function FilterTitle({title}){
     return (

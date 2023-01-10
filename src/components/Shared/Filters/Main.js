@@ -1,7 +1,7 @@
-import Price from "./Price"
-import SearchBar from '../SearchBar';
 import FilterBtn from "../../Buttons/FilterBtn";
 import uuid from "react-uuid";
+import './styles/Main.scss';
+
 
 export default function Main() {
     
@@ -18,8 +18,7 @@ export default function Main() {
     });
 
     return (
-        <div>
-            <SearchBar/>
+        <div className="filterWrapper">
             { filterBtns }
         </div>
     )
