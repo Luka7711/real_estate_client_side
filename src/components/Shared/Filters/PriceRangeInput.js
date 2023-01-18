@@ -14,35 +14,30 @@ export default function PriceRangeInput({
     initialVal
    }) {
    
-   const [price, setPrice] = useState("");
-   const [stringNum, setStringNum] = useState(initialVal);
+   const [numPrice, setNumPrice] = useState("");
+   const [stringPrice, setStringPrice] = useState(initialVal);
 
 
 
    useEffect(() => {
-       setStringNum(nFormatter(price, 2));
-   }, [price])
+     setStringPrice(nFormatter(numPrice, 2));
+   }, [numPrice])
 
 
 
 
-   const priceList = priceNumbers.map(price => {
-       const formattedPrice = "$" + formatter(price, 2)
+   const priceList = priceNumbers.map(numPrice => {
+       const formattedPrice = "$" + formatter(numPrice, 2)
        return (
-           <li onClick={() => setPrice(price)} key={uuid()}>
+           <li className="priceNumber" onClick={() => setNumPrice(numPrice)} key={uuid()}>
                { formattedPrice }
            </li>
        )
    });
 
 
-
-   const activateInput = (e) => {
-       const inputElement = document.querySelector('.inputPrice');
-   }
-
-   const handleChange = () => {
-       return;
+   const handleChange = (e) => {
+        setStringPrice(e.target.value)
    }
 
    return (
@@ -51,15 +46,14 @@ export default function PriceRangeInput({
                <label>{priceType}</label>
            </div>
 
-           <div className="inputWrapper" onClick={activateInput}>
+           <div className="inputWrapper">
                <input 
                    className="inputPrice"
                    key={uuid()} 
-                   type="text" 
-                   placeholder={stringNum} 
-                   value={stringNum}
-                   onChange={() => handleChange()}
-                   disabled
+                   type="string" 
+                   placeholder={stringPrice} 
+                   value={stringPrice}
+                   onChange={(e) => handleChange(e)}
                />
                <Icon icon={faArrowDown}/>
            </div>

@@ -12,20 +12,30 @@
       display: flex;
       flex-direction: row;
       background-color: #eeee;
-      padding: 10px;
-
-      input {
+      align-items: center;
+      .inputPrice {
         border: none;
         background-color: #eeee;
+        padding: 10px;
       }
       svg {
         background-color: #eeee;
       }
     }
     .priceRangeWrapper {
+      
       .labelPrice {
         padding: 10px 0;
+      }
+      
+      .priceNumber {
+        padding: 5px;
+      }
+      .priceNumber:hover {
+        background-color: lightgrey;
+        cursor: pointer;
       }
     }
   }
 }
+
