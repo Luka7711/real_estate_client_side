@@ -35,12 +35,6 @@ export default function Main() {
     ];
 
 
-
-    function switchFilterOption(filterName) {
-        setCurrentOption(filterName);
-    }
-
-
     const BTN_FILTERS = filterOptions.map(option => {
 
         if (currentOption === option['name']) {
@@ -49,7 +43,7 @@ export default function Main() {
                 <FilterBtn 
                   name={option['name']} 
                   key={uuid()} 
-                  switchFilterOption={switchFilterOption}
+                  setCurrentOption={setCurrentOption}
                   filterForm={option['compon']}
                 />
             )
@@ -58,7 +52,7 @@ export default function Main() {
                 <FilterBtn 
                   name={option['name']} 
                   key={uuid()} 
-                  switchFilterOption={switchFilterOption}
+                  setCurrentOption={setCurrentOption}
                   filterForm={null}
               />
             )
