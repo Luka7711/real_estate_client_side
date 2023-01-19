@@ -94,10 +94,6 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     }, []);
 
-
-
-
-
     const updateRenderedHouses = async() => {
         const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
         setRenderedHouses(response);
