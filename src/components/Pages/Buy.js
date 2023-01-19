@@ -1,8 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { connect } from "react-redux";
-import { cleanupSearchLocation } from "../../actions";
+import { cleanupSearchLocation, fetchHouses } from "../../actions";
 import Pagination from "../Shared/Pagination";
-import fetchHouses from "../../apis/housing"
 import HousingList from "./HousingList"
 import Map from "../Shared/Map/Map";
 import FilterList from '../Shared/Filters/Main';
@@ -42,9 +41,12 @@ let PageSize = 10;
 
 
 
-const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
+const Buy = ({ 
+    houses, 
+    searchLocation,
+    cleanupSearchLocation,
+    fetchHouses }) => {
     
-    const [renderedHouses, setRenderedHouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [height, setHeight] = useState(0);
 
@@ -62,9 +64,9 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
 
-        return renderedHouses.slice(firstPageIndex, lastPageIndex);
+        return houses.slice(firstPageIndex, lastPageIndex);
 
-    }, [currentPage, renderedHouses]);
+    }, [currentPage, houses]);
     
 
 
@@ -76,16 +78,13 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
         const rootContainer = document.querySelector("body");
         rootContainer.style.overflow = "hidden";
+        
 
         if (searchLocation) {
 
-            updateRenderedHouses();
+            fetchHouses(searchLocation.city, searchLocation.state_id);
 
-        } else {
-
-            setRenderedHouses(houses);
-
-        }
+        } 
 
         return () => {
             cleanupSearchLocation();
@@ -94,17 +93,13 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
 
     }, []);
 
-    const updateRenderedHouses = async() => {
-        const response = await fetchHouses(searchLocation.city, searchLocation.state_id);
-        setRenderedHouses(response);
-    }
     
 
     return (
         <>
         <FilterList/>
         <div style={searchPageContainer}>
-            <div style={searchPageMapContainer}><Map houses={renderedHouses}/></div>
+            <div style={searchPageMapContainer}><Map houses={houses}/></div>
             <div style={searchPageListContainer}>
                 <div style={housingListContainer}>
                     <HousingList houses={currentTableData}/>
@@ -113,7 +108,7 @@ const Buy = ({ houses, searchLocation, cleanupSearchLocation }) => {
                     <Pagination
                         className="pagination-bar"
                         currentPage={currentPage}
-                        totalCount={renderedHouses.length}
+                        totalCount={houses.length}
                         pageSize={PageSize}
                         onPageChange={page => setCurrentPage(page)}
                     />

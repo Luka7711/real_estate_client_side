@@ -9,6 +9,7 @@ import { getUserGeolocation } from '../utils';
  */
 
 export const fetchHouses = (city, state) => async dispatch => {
+    console.log("house fetched")
     const promise = await fetchHouseList(city, state);
     dispatch({ type: "FETCH_HOUSES", payload: promise });
 };

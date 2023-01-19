@@ -1,4 +1,5 @@
 const housingReducer = (state = [], action) => {
+
     switch (action.type) {
         
         case "FETCH_HOUSES":
