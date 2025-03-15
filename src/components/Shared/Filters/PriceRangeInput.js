@@ -37,7 +37,8 @@ export default function PriceRangeInput({
 
 
    const handleChange = (e) => {
-        setStringPrice(e.target.value)
+        console.log("changing state")
+        // setStringPrice(e.target.value)
    }
 
    return (

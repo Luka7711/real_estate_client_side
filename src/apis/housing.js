@@ -12,7 +12,6 @@ export default async function fetchData(city, state){
         return houseData
 
     } else {
-        console.log("FFFFFETCHING")
         const url = `https://us-real-estate.p.rapidapi.com/for-sale?offset=0&limit=200&state_code=${state}&city=${city}&sort=newest`
         
         const options = {

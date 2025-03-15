@@ -11,15 +11,15 @@ import Map from "../Shared/Map/Map";
 
 /* Display static houses */
 
-const Home = ({ 
-        location, 
-        fetchUserGeolocation, 
-        fetchHouses,
-        houses
-    }) => {
+const Home = ({
+    location,
+    fetchUserGeolocation,
+    fetchHouses,
+    houses
+}) => {
 
     useEffect(() => {
-
+        console.log(location, "location")
         window.addEventListener('load', () => {
             fetchUserGeolocation();
         })
@@ -32,12 +32,12 @@ const Home = ({
     }, [location]);
 
     return (
-            <React.Fragment>
-                <HomeSearchbarHolder/>
-                <Carousel>     
-                    <HousingList houses={houses.slice(0, 12)}/> 
-                </Carousel>
-            </React.Fragment>
+        <React.Fragment>
+            <HomeSearchbarHolder />
+            <Carousel>
+                <HousingList houses={houses.slice(0, 12)} />
+            </Carousel>
+        </React.Fragment>
     )
 }
 

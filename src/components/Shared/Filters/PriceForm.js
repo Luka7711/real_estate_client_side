@@ -10,6 +10,9 @@ import PriceRangeInput from "./PriceRangeInput";
 
 export default function Price() {
 
+    // const [housePrice, setHousePrice] = useState({min: null, max: null});
+        
+
     let minPriceRange = [];
     let maxPriceRange = [];
 
